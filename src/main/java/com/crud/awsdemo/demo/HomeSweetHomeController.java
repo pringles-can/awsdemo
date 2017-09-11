@@ -15,7 +15,7 @@ public class HomeSweetHomeController {
 
     @RequestMapping(value="/index")
     public ModelAndView indexPage() {
-        return new ModelAndView("home"); // more like shitdex; change
+        return new ModelAndView("home");
     }
 
 

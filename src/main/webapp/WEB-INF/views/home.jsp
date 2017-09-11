@@ -5,7 +5,7 @@
   Time: 4:36 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page session="false" %>
@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-<h1>Gonna put a header here that would make a good header</h1>
+<h1>Gonna put words here that would make a good header made out of words</h1>
 <p>
     ${message}<br/>
     <a href="${pageContext.request.contextPath}/persons">Click here to generate the Person List</a><br/>
