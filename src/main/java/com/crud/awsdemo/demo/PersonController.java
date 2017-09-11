@@ -20,7 +20,7 @@ public class PersonController {
 
     //@Autowired(required = true)
     //@Qualifier(value = "personService")
-    public void setPhoneService(PersonService ps) {
+    public void setPersonService(PersonService ps) {
         this.personService = ps;
     }
 
@@ -64,7 +64,7 @@ public class PersonController {
         return "person";
     }
 
-    
+
 
 
 
