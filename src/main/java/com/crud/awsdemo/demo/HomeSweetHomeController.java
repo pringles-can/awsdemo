@@ -27,7 +27,6 @@ public class HomeSweetHomeController {
     @Autowired
     PersonDAO personDAO;
 
-
     private String imgUrl;
 
 
@@ -90,6 +89,8 @@ public class HomeSweetHomeController {
     public String mainPage() {
         return "home";
     }
+
+    
     /*
     @RequestMapping(value="/index")
     public ModelAndView indexPage() {

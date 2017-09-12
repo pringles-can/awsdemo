@@ -62,19 +62,15 @@
 
     <table class="tg">
         <tr>
-            <th class="tg-au1h" colspan="7">Cats</th>
+            <th class="tg-au1h" colspan="7">Person</th>
         </tr>
-        <!--
+
         <tr>
-            <td class="tg-5919">Cat ID</td>
-            <td class="tg-5919">Cat's Name</td>
-            <td class="tg-5919">Fluffy Rating</td>
-            <td class="tg-5919">Delete</td>
-            <td class="tg-5919">Update This Cat</td>
-            <td class="tg-5919">Insert Image of This Cat</td>
-            <td class="tg-5919">Image</td>
+            <td class="tg-5919">ID</td>
+            <td class="tg-5919">Name</td>
+            <td class="tg-5919">Country</td>
         </tr>
-        -->
+
         <c:forEach items="${person.content}" var="person">
             <tr>
                 <td class="tg-d7nh">${person.id}</td>
