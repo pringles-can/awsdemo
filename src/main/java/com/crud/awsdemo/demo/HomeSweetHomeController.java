@@ -1,18 +1,20 @@
 package com.crud.awsdemo.demo;
 
+import com.crud.awsdemo.dao.PersonDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.validation.BindingResult;
 
 import com.crud.awsdemo.spring.model.Person;
-import com.crud.awsdemo.service.PersonService;
 
 import javax.validation.Valid;
 
@@ -20,7 +22,11 @@ import javax.validation.Valid;
 @Controller
 public class HomeSweetHomeController {
 
-    private PersonService personService;
+
+
+    @Autowired
+    PersonDAO personDAO;
+
 
     private String imgUrl;
 
@@ -32,7 +38,7 @@ public class HomeSweetHomeController {
     public String getImgUrl() {
         return this.imgUrl;
     }
-
+/*
     //@Autowired(required = true)
     //@Qualifier(value = "personService")
     public void setPersonService(PersonService ps) {
@@ -77,18 +83,29 @@ public class HomeSweetHomeController {
 
         return "personV";
     }
+    */
 
     //home shit
     @RequestMapping(value="/")
-    public ModelAndView mainPage() {
-        return new ModelAndView("home");
+    public String mainPage() {
+        return "home";
     }
-
+    /*
     @RequestMapping(value="/index")
     public ModelAndView indexPage() {
         return new ModelAndView("home");
     }
+*/
 
+    private Sort sortByIdAsc() {
+        return new Sort(Sort.Direction.ASC, "id");
+    }
 
+    //Model
+    @ModelAttribute("person")
+    public Page<Person> data(@PageableDefault(value = 5, page = 0, sort = {"id"}) Pageable pageable) {
+        Page<Person> allTheCats = personDAO.findAll(pageable);
+        return allTheCats;
+    }
 
 }
