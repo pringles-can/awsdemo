@@ -22,7 +22,6 @@ public class HomeSweetHomeController {
     private String imgUrl;
 
 
-
     public void setImgUrl(String url) {
         this.imgUrl = url;
     }

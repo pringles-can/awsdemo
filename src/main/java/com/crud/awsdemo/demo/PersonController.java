@@ -13,7 +13,7 @@ import com.crud.awsdemo.spring.model.Person;
 import com.crud.awsdemo.service.PersonService;
 
 
-@Controller
+//@Controller
 public class PersonController {
 
     private PersonService personService;
