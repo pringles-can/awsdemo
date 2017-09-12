@@ -7,12 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.crud.awsdemo.spring.model.Person;
 
@@ -37,52 +34,6 @@ public class HomeSweetHomeController {
     public String getImgUrl() {
         return this.imgUrl;
     }
-/*
-    //@Autowired(required = true)
-    //@Qualifier(value = "personService")
-    public void setPersonService(PersonService ps) {
-        this.personService = ps;
-    }
-
-    @RequestMapping(value = "/persons", method = RequestMethod.GET)
-
-    public String listPersons(@Valid Model model) {
-        model.addAttribute("person", new Person());
-        model.addAttribute("listPersons", this.personService.listPersons());
-
-        return "personV";
-    }
-
-    // add/update
-    @RequestMapping(value = "/person/add", method = RequestMethod.POST)
-    public String addPerson(@ModelAttribute("person") Person p) {
-        if (p.getId() == 0) {
-            // new person, add
-            this.personService.addPerson(p);
-        } else {
-            // existing, update
-            this.personService.updatePerson(p);
-        }
-
-        return "redirect:/persons";
-
-    }
-
-    @RequestMapping("/remove/{id}")
-    public String removePerson(@PathVariable("id") int id) {
-
-        this.personService.removePerson(id);
-        return "redirect:/persons";
-    }
-
-    @RequestMapping("/edit{id}")
-    public String editPerson(@PathVariable("id") int id, Model model) {
-        model.addAttribute("personV", this.personService.getPersonById(id));
-        model.addAttribute("listPersons", this.personService.listPersons());
-
-        return "personV";
-    }
-    */
 
     //home shit
     @RequestMapping(value="/")
@@ -105,8 +56,30 @@ public class HomeSweetHomeController {
     //Model
     @ModelAttribute("person")
     public Page<Person> data(@PageableDefault(value = 5, page = 0, sort = {"id"}) Pageable pageable) {
-        Page<Person> allTheCats = personDAO.findAll(pageable);
-        return allTheCats;
+        Page<Person> persons = personDAO.findAll(pageable);
+        return persons;
+    }
+
+    @RequestMapping(value="/update/{id}" , method = RequestMethod.POST )
+    public String savePerson(@PathVariable("id") int id, @RequestParam String name, @RequestParam String country)
+    {
+
+        Person person = personDAO.findOne(id);
+        person.setName(name);
+        person.setCountry(country);
+        personDAO.save(person);
+        return "redirect:/awsdemo/";
+
+    }
+
+    @RequestMapping(value="/person/add", method = RequestMethod.POST)
+    public String addPerson(@PathVariable("id") int id, @RequestParam String name, @RequestParam String country) {
+
+        Person person = new Person(id, name);
+        personDAO.save(person);
+
+
+        return "redirect:/awsdemo/";
     }
 
 }

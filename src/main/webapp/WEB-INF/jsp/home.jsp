@@ -58,7 +58,30 @@
             color: #32cb00;
             vertical-align: top
         }
+        a.button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 10px 15px 10px 8px;
+        }
+        a.btn{
+            background-color: #f44336;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 10px 15px 10px 8px;
+        }
     </style>
+
 
     <table class="tg">
         <tr>

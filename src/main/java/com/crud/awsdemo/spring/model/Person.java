@@ -29,6 +29,19 @@ public class Person {
     @Column(name="country")
     private String country;
 
+    public Person(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Person(int id, String name, String country) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+    }
+
+    protected Person(){}
+
     public int getId() {
         return id;
     }
