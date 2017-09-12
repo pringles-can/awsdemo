@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
 
 import com.crud.awsdemo.spring.model.Person;
 import com.crud.awsdemo.service.PersonService;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -37,8 +40,9 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
-    public String listPersons(Model model) {
-        model.addAttribute("personV", new Person());
+
+    public String listPersons(@Valid Model model) {
+        model.addAttribute("person", new Person());
         model.addAttribute("listPersons", this.personService.listPersons());
 
         return "personV";

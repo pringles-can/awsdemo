@@ -2,6 +2,7 @@ package com.crud.awsdemo.service;
 
 import java.util.List;
 
+import com.crud.awsdemo.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PersonDAO personDAO;
+
+    @Autowired
+    private PersonRepository personRepository;
 
     public void setPersonDAO(PersonDAO personDAO) {
         this.personDAO = personDAO;
