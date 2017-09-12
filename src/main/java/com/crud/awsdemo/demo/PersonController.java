@@ -18,6 +18,18 @@ public class PersonController {
 
     private PersonService personService;
 
+    private String imgUrl;
+
+
+
+    public void setImgUrl(String url) {
+        this.imgUrl = url;
+    }
+
+    public String getImgUrl() {
+        return this.imgUrl;
+    }
+
     //@Autowired(required = true)
     //@Qualifier(value = "personService")
     public void setPersonService(PersonService ps) {
@@ -44,8 +56,6 @@ public class PersonController {
         }
 
         return "redirect:/persons";
-
-
 
     }
 
