@@ -64,6 +64,7 @@
         <tr>
             <th class="tg-au1h" colspan="7">Cats</th>
         </tr>
+        <!--
         <tr>
             <td class="tg-5919">Cat ID</td>
             <td class="tg-5919">Cat's Name</td>
@@ -73,6 +74,7 @@
             <td class="tg-5919">Insert Image of This Cat</td>
             <td class="tg-5919">Image</td>
         </tr>
+        -->
         <c:forEach items="${person.content}" var="person">
             <tr>
                 <td class="tg-d7nh">${person.id}</td>
