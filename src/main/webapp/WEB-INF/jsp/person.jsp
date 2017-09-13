@@ -4,7 +4,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>Phone Page</title>
+    <title>Person Page</title>
     <style type="text/css">
         .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc; cellpadding:10;
             cellspacing:10;}
@@ -51,56 +51,29 @@
 </head>
 <body>
 <h1>
-    Add a Phone
+    Add a Person
 </h1>
 
-<c:url var="addAction" value="/add" ></c:url>
+<c:url var="addAction" value="/person/add" ></c:url>
 
+<%--@elvariable id="person" type="com.crud.awsdemo.spring.model.Person"--%>
 <form:form action="${addAction}" commandName="person">
     <table>
-        <c:if test="${!empty person.name}">
-            <tr>
-                <td>
-                    <form:label path="id">
-                        <spring:message text="ID"/>
-                    </form:label>
-                </td>
-                <td>
-                    <form:input path="id" readonly="true" size="8"  disabled="true" />
-                    <form:hidden path="id" />
-                </td>
-            </tr>
-        </c:if>
-        <tr>
-            <td>
-                <form:label path="name">
-                    <spring:message text="Name"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="name" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="country">
-                    <spring:message text="country"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="country" />
-            </td>
-        </tr>
+
+        <form id="theform" method = "post" action = "/person/person/add" >
+            <table class="tg">
+                <tr>
+                    <th class="tg-mkpy">Add A person:</th>
+
+                    <th class="tg-mbw0"><input type="text" name = "name" id="id5" /></th>
+                    <th class="tg-mbw0"><input type="text" name = "country" id="id6" /></th>
+                    <th class="tg-mbw0"><input type="submit" id="id3" /></th>
+                </tr>
+            </table>
+        </form>
         <tr>
             <td colspan="2">
-                <c:if test="${!empty person.name}">
-                    <input type="submit"
-                           value="<spring:message text="Edit person"/>" />
-                </c:if>
-                <c:if test="${empty person.name}">
-                    <input type="submit"
-                           value="<spring:message text="Add person"/>" />
-                </c:if>
+
             </td>
         </tr>
     </table>

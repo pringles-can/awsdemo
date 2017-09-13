@@ -7,12 +7,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 
 import com.crud.awsdemo.spring.model.Person;
 
+import javax.servlet.RequestDispatcher;
 import javax.validation.Valid;
 
 
@@ -56,8 +58,8 @@ public class HomeSweetHomeController {
     //Model
     @ModelAttribute("person")
     public Page<Person> data(@PageableDefault(value = 5, page = 0, sort = {"id"}) Pageable pageable) {
-        Page<Person> persons = personDAO.findAll(pageable);
-        return persons;
+        Page<Person> listPersons = personDAO.findAll(pageable);
+        return listPersons;
     }
 
     @RequestMapping(value="/update/{id}" , method = RequestMethod.POST )
@@ -68,18 +70,31 @@ public class HomeSweetHomeController {
         person.setName(name);
         person.setCountry(country);
         personDAO.save(person);
-        return "redirect:/awsdemo/";
+        return "redirect:/persons/";
 
     }
 
+    @ModelAttribute("person")
+    @RequestMapping(value="/person", method = RequestMethod.GET)
+    public String loadPersonPage(ModelMap model) {
+        model.addAttribute("person", new Person(" "," "));
+        return "person";
+    }
+
     @RequestMapping(value="/person/add", method = RequestMethod.POST)
-    public String addPerson(@PathVariable("id") int id, @RequestParam String name, @RequestParam String country) {
+    public String addPerson( @RequestParam String name, @RequestParam String country) {
 
-        Person person = new Person(id, name);
-        personDAO.save(person);
+            personDAO.save(new Person(name, country));
 
 
-        return "redirect:/awsdemo/";
+        return "redirect:/";
+        //return "redirect:/person/add";
+    }
+
+    @RequestMapping(value="/person/remove", method = RequestMethod.POST)
+    public String removePerson(@RequestParam int id) {
+        personDAO.delete(id);
+        return "redirect:/";
     }
 
 }

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * Entity bean with JPA annotations
@@ -16,10 +17,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="PERSON")
-public class Person {
+public class Person implements Serializable {
 
     @Id
-    @Column(name="id")
+    @Column(name="id", nullable = false, insertable = false, updatable = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -30,17 +31,22 @@ public class Person {
     private String country;
 
     public Person(int id, String name) {
-        this.id = id;
-        this.name = name;
+        //this.id = id;
+        //this.name = name;
+
     }
 
-    public Person(int id, String name, String country) {
-        this.id = id;
+    public Person(String name, String country) {
         this.name = name;
-        this.country = country;
+        this.country= country;
     }
 
-    protected Person(){}
+
+
+    // default; totally works, the debugger's full of shit
+    protected Person(){
+
+    }
 
     public int getId() {
         return id;

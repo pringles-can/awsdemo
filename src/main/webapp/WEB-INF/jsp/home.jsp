@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="false" %>
 <html>
 <table>
 
@@ -58,28 +59,7 @@
             color: #32cb00;
             vertical-align: top
         }
-        a.button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 15px;
-            margin: 10px 15px 10px 8px;
-        }
-        a.btn{
-            background-color: #f44336;
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 15px;
-            margin: 10px 15px 10px 8px;
-        }
+
     </style>
 
 
@@ -100,7 +80,6 @@
                 <td class="tg-d7nh">${person.name}</td>
                 <td class="tg-jnuu">${person.country}</td>
 
-
             </tr>
         </c:forEach>
 
@@ -111,6 +90,17 @@
         <div style="display: inline-block;"><a href="F="><c:out value="${i}"/></a></div>
     </c:forEach>
     </p>
+
+    <a href="${pageContext.request.contextPath}/person">Click to do add</a><br/>
+    <a href="${pageContext.request.contextPath}/person/update{id}">Click to do remove</a><br/>
+    <script language="JavaScript">
+        function addPerson() {
+            //document.addThings.addButton.value = "yes";
+
+            //addThings.submit();
+
+        }
+    </script>
 
 </table>
 </html>
