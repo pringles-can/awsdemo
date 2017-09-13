@@ -91,16 +91,8 @@
     </c:forEach>
     </p>
 
-    <a href="${pageContext.request.contextPath}/person">Click to do add</a><br/>
-    <a href="${pageContext.request.contextPath}/person/update{id}">Click to do remove</a><br/>
-    <script language="JavaScript">
-        function addPerson() {
-            //document.addThings.addButton.value = "yes";
+    <a href="${pageContext.request.contextPath}/person">Click to add</a><br/>
 
-            //addThings.submit();
-
-        }
-    </script>
 
 </table>
 </html>

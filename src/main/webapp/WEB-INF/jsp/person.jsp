@@ -79,7 +79,8 @@
     </table>
 </form:form>
 <br>
-<h3>persons List</h3>
+
+<h3>Persons List</h3>
 <c:if test="${!empty listPersons}">
     <table class="tg">
         <tr>

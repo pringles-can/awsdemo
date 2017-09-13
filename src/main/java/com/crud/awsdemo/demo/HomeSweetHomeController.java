@@ -28,7 +28,6 @@ public class HomeSweetHomeController {
 
     private String imgUrl;
 
-
     public void setImgUrl(String url) {
         this.imgUrl = url;
     }
@@ -43,22 +42,15 @@ public class HomeSweetHomeController {
         return "home";
     }
 
-    
-    /*
-    @RequestMapping(value="/index")
-    public ModelAndView indexPage() {
-        return new ModelAndView("home");
-    }
-*/
-
     private Sort sortByIdAsc() {
         return new Sort(Sort.Direction.ASC, "id");
     }
 
     //Model
     @ModelAttribute("person")
-    public Page<Person> data(@PageableDefault(value = 5, page = 0, sort = {"id"}) Pageable pageable) {
+    public Page<Person> data(ModelMap model, @PageableDefault(value = 5, page = 0, sort = {"id"}) Pageable pageable) {
         Page<Person> listPersons = personDAO.findAll(pageable);
+        model.addAttribute(listPersons);
         return listPersons;
     }
 
@@ -77,16 +69,13 @@ public class HomeSweetHomeController {
     @ModelAttribute("person")
     @RequestMapping(value="/person", method = RequestMethod.GET)
     public String loadPersonPage(ModelMap model) {
-        model.addAttribute("person", new Person(" "," "));
+        //model.addAttribute("person", new Person(" "," "));
         return "person";
     }
 
     @RequestMapping(value="/person/add", method = RequestMethod.POST)
-    public String addPerson( @RequestParam String name, @RequestParam String country) {
-
-            personDAO.save(new Person(name, country));
-
-
+    public String addPerson(@RequestParam String name, @RequestParam String country) {
+        personDAO.save(new Person(name, country));
         return "redirect:/";
         //return "redirect:/person/add";
     }
