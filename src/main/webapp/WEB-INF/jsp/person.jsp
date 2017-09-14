@@ -4,11 +4,7 @@
 <%@ page session="false" %>
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -128,7 +124,7 @@
 </table>
 
 <body>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <script type="text/javascript" src="http://twitter.github.io/bootstrap/assets/js/bootstrap-transition.js"></script>
 <script type="text/javascript" src="http://twitter.github.io/bootstrap/assets/js/bootstrap-collapse.js"></script>
 
@@ -162,9 +158,10 @@
 
 
 <c:url var="remAction" value="/person/remove/{id}" ></c:url>
+<c:url var="editAction" value="/person/edit/{id}" ></c:url>
 <h3>Persons List</h3>
 <%--@elvariable id="person" type="com.crud.awsdemo.spring.model.Person"--%>
-<form:form method="post" action="${remAction}" commandName="person">
+
 <c:if test="${!empty listPersons}">
     <table class="tg" >
         <tr>
@@ -178,17 +175,26 @@
                 <td>${person.id}</td>
                 <td>${person.name}</td>
                 <td>${person.country}</td>
-                <td><a method="post" href="<c:url value='/person/person/edit${person.id}' />"  class="button">Edit</a>
-                    <a href="<c:url value='/person/remove/${person.id}' />"  class="btn">Delete</a>
+                <td><a href="<c:url value='/person/edit/${person.id}' />"  class="button">Edit</a>
+                    <a href="<c:url value='/person/remove/${person.id}' />"  class="btn" id="removeButton">Delete
+                    </a>
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#editable">Edit</button>
+                    <div id="editable" class="collapse">
+                        <input type="text" name = "name" id="idFuckIt" />
+                        <input type="text" name = "country" id="id89" />
+                        <button type="button" class="btn" value="Submit" onclick="location.href='/person/edit/${person.id}'">Update</button>
+                    </div>
                 </td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
-</form:form>
+
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

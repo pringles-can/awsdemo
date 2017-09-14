@@ -67,7 +67,7 @@ public class HomeSweetHomeController {
         listPersons = lp;
     }
 
-    @RequestMapping(value="/update/{id}" , method = RequestMethod.POST )
+    @RequestMapping(value="/person/edit/{id}" , method = RequestMethod.GET )
     public String savePerson(@PathVariable("id") int id, @RequestParam String name, @RequestParam String country)
     {
 
