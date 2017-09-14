@@ -17,7 +17,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>People</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -83,40 +83,101 @@
             vertical-align: top
         }
 
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {
+            height: auto
+        }
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+
+            .row.content {
+                height: auto;
+            }
+        }
+
+
     </style>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Person</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/person">Add</a></li>
+                    <li><a href="#">Remove</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Don't click this</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <div class="container">
-        <h2>Person</h2>
-        <p>Some people might be listed below</p>
-        <table class="table table-bordered">
-            <c:if test="${!empty listPersons}">
-                <tr>
-                    <td class="tg-5919">ID</td>
-                    <td class="tg-5919">Name</td>
-                    <td class="tg-5919">RANDOM FUCKING TEXT</td>
-                </tr>
-                <c:forEach items="${person.content}" var="person">
-                    <tr>
-                        <td class="tg-d7nh">${person.id}</td>
-                        <td class="tg-d7nh">${person.name}</td>
-                        <td class="tg-jnuu">${person.country}</td>
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="container">
+                <h2>Person</h2>
+                <p>Some people might be listed below</p>
+                <table class="table table-bordered">
+                    <c:if test="${!empty listPersons}">
+                        <tr>
+                            <td class="tg-5919">ID</td>
+                            <td class="tg-5919">Name</td>
+                            <td class="tg-5919">RANDOM FUCKING TEXT</td>
+                        </tr>
+                        <c:forEach items="${person.content}" var="person">
+                            <tr>
+                                <td class="tg-d7nh">${person.id}</td>
+                                <td class="tg-d7nh">${person.name}</td>
+                                <td class="tg-jnuu">${person.country}</td>
 
-                    </tr>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                </table>
+            </div>
+
+
+            <ul class="pagination">
+                <c:forEach var="i" begin="1" end="${person.totalPages}">
+                    <li><a href="F="><c:out value="${i}"/></a></li>
                 </c:forEach>
-            </c:if>
-        </table>
-    </div>
-
-
-    <ul class="pagination">
-    <c:forEach var="i" begin="1" end="${person.totalPages}">
-        <li><a href="F="><c:out value="${i}"/></a></li>
-    </c:forEach>
-    </p>
-    </ul>
-    <br/>
-    <a href="${pageContext.request.contextPath}/person">Click to add</a><br/>
-
-
+                </p>
+            </ul>
+            <br/>
+        </div>
+        </div>
 </table>
 </html>
