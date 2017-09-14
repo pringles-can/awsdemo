@@ -68,16 +68,18 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/person/edit/{id}" , method = RequestMethod.GET )
-    public String savePerson(@PathVariable("id") int id)
+    public String savePerson(ModelMap model, @PathVariable("id") int id)
     {
 
         Person person = personDAO.findOne(id);
         personDAO.save(person);
+        model.put("person", person);
+
         return "Update";
 
     }
 
-    @RequestMapping(value="/person/save/{id}" , method = RequestMethod.POST )
+    @RequestMapping(value="/person/save/{id}", method = RequestMethod.POST )
     public String save(@PathVariable("id") int id, @RequestParam String name, @RequestParam String country)
     {
         if(name=="" || country=="")
