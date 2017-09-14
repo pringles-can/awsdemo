@@ -88,7 +88,7 @@ public class HomeSweetHomeController {
     @RequestMapping(value="/person/add", method = RequestMethod.POST)
     public String addPerson(@RequestParam String name, @RequestParam String country) {
         personDAO.save(new Person(name, country));
-        return "redirect:/";
+        return "redirect:/person";
         //return "redirect:/person/add";
     }
 
