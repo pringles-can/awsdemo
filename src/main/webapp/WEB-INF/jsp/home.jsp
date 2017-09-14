@@ -93,7 +93,7 @@
                 <tr>
                     <td class="tg-5919">ID</td>
                     <td class="tg-5919">Name</td>
-                    <td class="tg-5919">Country</td>
+                    <td class="tg-5919">RANDOM FUCKING TEXT</td>
                 </tr>
                 <c:forEach items="${person.content}" var="person">
                     <tr>
@@ -106,14 +106,15 @@
             </c:if>
         </table>
     </div>
-    
 
 
+    <ul class="pagination">
     <c:forEach var="i" begin="1" end="${person.totalPages}">
-        <div style="display: inline-block;"><a href="F="><c:out value="${i}"/></a></div>
+        <li><a href="F="><c:out value="${i}"/></a></li>
     </c:forEach>
     </p>
-
+    </ul>
+    <br/>
     <a href="${pageContext.request.contextPath}/person">Click to add</a><br/>
 
 

@@ -90,7 +90,7 @@
         <tr>
             <th width="80">ID</th>
             <th width="120">Person Name</th>
-            <th width="120">country</th>
+            <th width="120">RANDOM FUCKING TEXT</th>
             <th width="60">Action</th>
 
         </tr>
