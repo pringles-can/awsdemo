@@ -3,6 +3,7 @@ package com.crud.awsdemo.demo;
 import com.crud.awsdemo.dao.PersonDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -16,6 +17,8 @@ import com.crud.awsdemo.spring.model.Person;
 
 import javax.servlet.RequestDispatcher;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -27,6 +30,7 @@ public class HomeSweetHomeController {
     PersonDAO personDAO;
 
     private String imgUrl;
+    private List<Person> listPersons;
 
     public void setImgUrl(String url) {
         this.imgUrl = url;
@@ -49,9 +53,15 @@ public class HomeSweetHomeController {
     //Model
     @ModelAttribute("person")
     public Page<Person> data(ModelMap model, @PageableDefault(value = 5, page = 0, sort = {"id"}) Pageable pageable) {
-        Page<Person> listPersons = personDAO.findAll(pageable);
-        model.addAttribute(listPersons);
-        return listPersons;
+        Page<Person> persons = personDAO.findAll(pageable);
+        Page<Person> prsns = personDAO.findAll(new PageRequest(0, 20));
+        listPersons = prsns.getContent();
+        return persons;
+    }
+
+
+    private void setListPersons(ArrayList<Person> lp) {
+        listPersons = lp;
     }
 
     @RequestMapping(value="/update/{id}" , method = RequestMethod.POST )

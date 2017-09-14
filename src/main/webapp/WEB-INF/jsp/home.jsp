@@ -61,8 +61,7 @@
         }
 
     </style>
-
-
+    
     <table class="tg">
         <tr>
             <th class="tg-au1h" colspan="7">Person</th>
@@ -73,6 +72,7 @@
             <td class="tg-5919">Name</td>
             <td class="tg-5919">Country</td>
         </tr>
+        <c:if test="${!empty listPersons}">
 
         <c:forEach items="${person.content}" var="person">
             <tr>
@@ -82,6 +82,7 @@
 
             </tr>
         </c:forEach>
+        </c:if>
 
     </table>
 
