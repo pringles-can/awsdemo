@@ -12,10 +12,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
     <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <title>Person Page</title>
@@ -98,34 +100,38 @@
         }
 
     </style>
-    <!--
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Person</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="${pageContext.request.contextPath}/person">Add</a></li>
-                    <li><a href="#">Remove</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Don't click this</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    -->
 
 </head>
+<table>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Person</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="${pageContext.request.contextPath}/person">Add</a></li>
+                <li><a href="#">Remove</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Don't click this</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</table>
 
 <body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://twitter.github.io/bootstrap/assets/js/bootstrap-transition.js"></script>
+<script type="text/javascript" src="http://twitter.github.io/bootstrap/assets/js/bootstrap-collapse.js"></script>
+
 <h1>
     Add a Person
 </h1>
@@ -135,12 +141,10 @@
 <%--@elvariable id="person" type="com.crud.awsdemo.spring.model.Person"--%>
 <form:form action="${addAction}" commandName="person">
     <table>
-
         <form id="theform" method = "post" action = "/person/person/add" >
             <table class="tg">
                 <tr>
                     <th class="tg-mkpy">Add A person:</th>
-
                     <th class="tg-mbw0"><input type="text" name = "name" id="id5" /></th>
                     <th class="tg-mbw0"><input type="text" name = "country" id="id6" /></th>
                     <th class="tg-mbw0"><input type="submit" id="id3" /></th>
@@ -156,26 +160,35 @@
 </form:form>
 <br>
 
+
+<c:url var="remAction" value="/person/remove{id}" ></c:url>
 <h3>Persons List</h3>
+<%--@elvariable id="person" type="com.crud.awsdemo.spring.model.Person"--%>
+<form:form action="${remAction}" commandName="person">
 <c:if test="${!empty listPersons}">
-    <table class="tg">
+    <table class="tg" >
         <tr>
             <th width="80">ID</th>
             <th width="120">Person Name</th>
             <th width="120">RANDOM FUCKING TEXT</th>
             <th width="60">Action</th>
-
         </tr>
         <c:forEach items="${listPersons}" var="person">
             <tr>
                 <td>${person.id}</td>
                 <td>${person.name}</td>
                 <td>${person.country}</td>
-                <td><a href="<c:url value='/edit/${person.id}' />"  class="button">Edit</a>
-                    <a href="<c:url value='/remove/${person.id}' />"  class="btn">Delete</a></td>
+                <td><a method="post" href="<c:url value='/person/person/edit${person.id}' />"  class="button">Edit</a>
+                    <a method="post" href="<c:url value='/person/person/remove${person.id}' />"  class="btn">Delete</a>
+                </td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
+</form:form>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 </body>
 </html>
