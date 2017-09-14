@@ -175,14 +175,10 @@
                 <td>${person.id}</td>
                 <td>${person.name}</td>
                 <td>${person.country}</td>
-                <td><a href="<c:url value='/person/remove/${person.id}' />"  class="btn" id="removeButton">Delete
+                <td><a href="<c:url value='/person/edit/${person.id}' />"  class="button">Edit</a>
+                    <a href="<c:url value='/person/remove/${person.id}' />"  class="btn" id="removeButton">Delete
                     </a>
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#editable">Edit</button>
-                    <div id="editable" class="collapse">
-                        <input type="text" name = "name" id="idFuckIt" />
-                        <input type="text" name = "country" id="id89" />
-                        <button type="button" class="btn" value="Submit" onclick="location.href='/person/edit/${person.id}'">Update</button>
-                    </div>
+
                 </td>
             </tr>
         </c:forEach>

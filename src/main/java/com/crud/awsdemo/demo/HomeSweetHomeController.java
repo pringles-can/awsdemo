@@ -68,15 +68,35 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/person/edit/{id}" , method = RequestMethod.GET )
-    public String savePerson(@PathVariable("id") int id, @RequestParam String name, @RequestParam String country)
+    public String savePerson(@PathVariable("id") int id)
     {
 
         Person person = personDAO.findOne(id);
-        person.setName(name);
-        person.setCountry(country);
         personDAO.save(person);
-        return "redirect:/persons/";
+        return "Update";
 
+    }
+
+    @RequestMapping(value="/person/save/{id}" , method = RequestMethod.POST )
+    public String save(@PathVariable("id") int id, @RequestParam String name, @RequestParam String country)
+    {
+        if(name=="" || country=="")
+        {
+            return "updateerror";
+        }
+
+        else if(name.length() > 20 || country.length() > 30)
+        {
+            return "updateerror";
+        }
+
+        else {
+            Person dude = personDAO.findOne(id);
+            dude.setName(name);
+            dude.setCountry(country);
+            personDAO.save(dude);
+            return "redirect:/person";
+        }
     }
 
     @ModelAttribute("person")
