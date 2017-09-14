@@ -56,8 +56,11 @@ public class HomeSweetHomeController {
         Page<Person> persons = personDAO.findAll(pageable);
         Page<Person> prsns = personDAO.findAll(new PageRequest(0, 20));
         listPersons = prsns.getContent();
+        model.addAttribute("listPersons", listPersons);
         return persons;
     }
+
+
 
 
     private void setListPersons(ArrayList<Person> lp) {
@@ -79,7 +82,6 @@ public class HomeSweetHomeController {
     @ModelAttribute("person")
     @RequestMapping(value="/person", method = RequestMethod.GET)
     public String loadPersonPage(ModelMap model) {
-        //model.addAttribute("person", new Person(" "," "));
         return "person";
     }
 
