@@ -161,10 +161,10 @@
 <br>
 
 
-<c:url var="remAction" value="/person/remove{id}" ></c:url>
+<c:url var="remAction" value="/person/remove/{id}" ></c:url>
 <h3>Persons List</h3>
 <%--@elvariable id="person" type="com.crud.awsdemo.spring.model.Person"--%>
-<form:form action="${remAction}" commandName="person">
+<form:form method="post" action="${remAction}" commandName="person">
 <c:if test="${!empty listPersons}">
     <table class="tg" >
         <tr>
@@ -179,7 +179,7 @@
                 <td>${person.name}</td>
                 <td>${person.country}</td>
                 <td><a method="post" href="<c:url value='/person/person/edit${person.id}' />"  class="button">Edit</a>
-                    <a method="post" href="<c:url value='/person/person/remove${person.id}' />"  class="btn">Delete</a>
+                    <a href="<c:url value='/person/remove/${person.id}' />"  class="btn">Delete</a>
                 </td>
             </tr>
         </c:forEach>

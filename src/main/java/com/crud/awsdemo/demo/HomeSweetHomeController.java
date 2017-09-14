@@ -92,10 +92,10 @@ public class HomeSweetHomeController {
         //return "redirect:/person/add";
     }
 
-    @RequestMapping(value="/person/remove{id}", method = RequestMethod.POST)
-    public String removePerson(@RequestParam int id) {
+    @RequestMapping(value="/person/remove/{id}", method = RequestMethod.GET)
+    public String removePerson(@PathVariable("id") int id) {
         personDAO.delete(id);
-        return "redirect:/";
+        return "redirect:/person";
     }
 
 }
