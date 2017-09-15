@@ -53,7 +53,7 @@ public class HomeSweetHomeController {
         Page<Person> persons = personDAO.findAll(pageable);
         Page<Person> prsns = personDAO.findAll(new PageRequest(0, 20));
         listPersons = prsns.getContent();
-        ;
+        
         model.addAttribute("listPersons", listPersons);
         return persons;
     }
@@ -108,7 +108,7 @@ public class HomeSweetHomeController {
         return "redirect:/person";
         //return "redirect:/person/add";
     }
-    
+
     @RequestMapping(value="/search{id}" , method = RequestMethod.GET )
     public String search(@RequestParam int id, ModelMap model)
     {
