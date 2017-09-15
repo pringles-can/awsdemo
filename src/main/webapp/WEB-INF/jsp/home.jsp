@@ -19,6 +19,7 @@
 
     <title>Person</title>
 
+    <c:url var="searchAction" value="/search{id}" ></c:url>
 
 </head>
     <style type="text/css">
@@ -130,11 +131,12 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
                     <li><a href="${pageContext.request.contextPath}/person">Add</a></li>
-                    <li><a href="#">Remove</a></li>
+                    <li><a href="${pageContext.request.contextPath}/person">Remove</a></li>
                 </ul>
-                <form class="navbar-form navbar-left">
+                <form action="${searchAction}" class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" name="id" placeholder="Search"
+                               >
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>

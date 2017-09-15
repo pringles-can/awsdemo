@@ -10,15 +10,12 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.ui.Model;
 
 import com.crud.awsdemo.spring.model.Person;
 
-import javax.servlet.RequestDispatcher;
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -56,12 +53,10 @@ public class HomeSweetHomeController {
         Page<Person> persons = personDAO.findAll(pageable);
         Page<Person> prsns = personDAO.findAll(new PageRequest(0, 20));
         listPersons = prsns.getContent();
+        ;
         model.addAttribute("listPersons", listPersons);
         return persons;
     }
-
-
-
 
     private void setListPersons(ArrayList<Person> lp) {
         listPersons = lp;
@@ -103,7 +98,7 @@ public class HomeSweetHomeController {
 
     @ModelAttribute("person")
     @RequestMapping(value="/person", method = RequestMethod.GET)
-    public String loadPersonPage(ModelMap model) {
+    public String loadPersonPage() {
         return "person";
     }
 
@@ -112,6 +107,30 @@ public class HomeSweetHomeController {
         personDAO.save(new Person(name, country));
         return "redirect:/person";
         //return "redirect:/person/add";
+    }
+    
+    @RequestMapping(value="/search{id}" , method = RequestMethod.GET )
+    public String search(@RequestParam int id, ModelMap model)
+    {
+        if(personDAO.findOne(id)==null) {
+            return "searcherr"; // return something else, searchbyname
+        }
+
+        else {
+            Person person = personDAO.findOne(id);
+            model.put("person", person);
+            return "Update";
+        }
+    }
+
+    @RequestMapping(value="/searchbyname", method = RequestMethod.POST)
+    public String searchname(@RequestParam String name, ModelMap model)
+    {
+        List<Person> listP = personDAO.findAll();
+        List<Person> persons =
+                listP.stream().filter(x -> x.getName().toUpperCase().contains(name.toUpperCase())).collect(Collectors.toList());
+        model.put("persons", persons);
+        return "home";
     }
 
     @RequestMapping(value="/person/remove/{id}", method = RequestMethod.GET)
