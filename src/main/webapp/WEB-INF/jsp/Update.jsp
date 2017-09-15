@@ -67,10 +67,11 @@
         }
     }
 </style>
+
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myUpNavbar">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -79,16 +80,27 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/person">Add</a></li>
                 <li><a href="#">Remove</a></li>
             </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Don't click this</a></li>
             </ul>
         </div>
     </div>
 </nav>
+
+<body>
+<script type="text/javascript" src="http://twitter.github.io/bootstrap/assets/js/bootstrap-transition.js"></script>
+<script type="text/javascript" src="http://twitter.github.io/bootstrap/assets/js/bootstrap-collapse.js"></script>
+
 <p></p>
 
 

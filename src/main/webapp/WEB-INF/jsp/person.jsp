@@ -7,15 +7,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta charset="utf-8">
+    <<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <!-- Custom styles for this template -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <title>Person Page</title>
     <style type="text/css">
         .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc; cellpadding:10;
@@ -98,33 +94,36 @@
     </style>
 
 </head>
-<table>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Person</a>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Person</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/person">Add</a></li>
+                    <li><a href="#">Remove</a></li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Don't click this</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="${pageContext.request.contextPath}/person">Add</a></li>
-                <li><a href="#">Remove</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Don't click this</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-</table>
+    </nav>
 
 <body>
-
 <script type="text/javascript" src="http://twitter.github.io/bootstrap/assets/js/bootstrap-transition.js"></script>
 <script type="text/javascript" src="http://twitter.github.io/bootstrap/assets/js/bootstrap-collapse.js"></script>
 
@@ -149,7 +148,6 @@
         </form>
         <tr>
             <td colspan="2">
-
             </td>
         </tr>
     </table>
@@ -178,7 +176,6 @@
                 <td><a href="<c:url value='/person/edit/${person.id}' />"  class="button">Edit</a>
                     <a href="<c:url value='/person/remove/${person.id}' />"  class="btn" id="removeButton">Delete
                     </a>
-
                 </td>
             </tr>
         </c:forEach>

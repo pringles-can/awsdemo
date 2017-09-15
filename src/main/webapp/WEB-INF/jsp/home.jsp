@@ -19,14 +19,8 @@
 
     <title>Person</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
 </head>
-<table>
-
     <style type="text/css">
         .tg {
             border-collapse: collapse;
@@ -134,13 +128,20 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
                     <li><a href="${pageContext.request.contextPath}/person">Add</a></li>
                     <li><a href="#">Remove</a></li>
                 </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Don't click this</a></li>
                 </ul>
+
             </div>
         </div>
     </nav>
@@ -179,5 +180,5 @@
             <br/>
         </div>
         </div>
-</table>
+
 </html>
