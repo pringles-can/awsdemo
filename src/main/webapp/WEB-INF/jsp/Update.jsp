@@ -101,12 +101,12 @@
 
     </style>
 
-    <form method="post" action="/person/save/${Person.id}">
+    <form method="post" action="/person/save/${person.id}">
         <table class="tg">
             <tr>
-                <th class="tg-mbw0">New Name:<input type="text" name="name" id="id18" placeholder="${Person.name}"></th>
+                <th class="tg-mbw0">New Name:<input type="text" name="name" id="id18" placeholder="${person.name}"></th>
                 <th class="tg-mbw0">New fucking whatever:<input type="text" name="country" id="id19"
-                                                                placeholder="${Person.country}"></th>
+                                                                placeholder="${person.country}"></th>
                 <th class="tg-mbw0"><input type="submit" id="id20"/></th>
             </tr>
         </table>

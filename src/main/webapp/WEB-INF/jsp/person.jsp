@@ -137,7 +137,7 @@
 <%--@elvariable id="person" type="com.crud.awsdemo.spring.model.Person"--%>
 <form:form action="${addAction}" commandName="person">
     <table>
-        <form id="theform" method = "post" action = "/person/person/add" >
+        <form id="addForm" method = "post" action = "/person/person/add" >
             <table class="tg">
                 <tr>
                     <th class="tg-mkpy">Add A person:</th>
