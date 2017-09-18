@@ -144,7 +144,11 @@ public class HomeSweetHomeController {
                 listP.stream().filter(x -> x.getName().toUpperCase().contains(name.toUpperCase())).collect(Collectors.toList());
         model.put("persons", persons);
         return "home";
+
+
     }
+
+
 
     @RequestMapping(value="/person/remove/{id}", method = RequestMethod.GET)
     public String removePerson(@PathVariable("id") int id) {
