@@ -53,7 +53,7 @@ public class HomeSweetHomeController {
         Page<Person> persons = personDAO.findAll(pageable);
         Page<Person> prsns = personDAO.findAll(new PageRequest(0, 20));
         listPersons = prsns.getContent();
-        
+
         model.addAttribute("listPersons", listPersons);
         return persons;
     }
@@ -61,6 +61,8 @@ public class HomeSweetHomeController {
     private void setListPersons(ArrayList<Person> lp) {
         listPersons = lp;
     }
+
+
 
     @RequestMapping(value="/person/edit/{id}" , method = RequestMethod.GET )
     public String savePerson(ModelMap model, @PathVariable("id") int id)
@@ -77,22 +79,19 @@ public class HomeSweetHomeController {
     @RequestMapping(value="/person/save/{id}", method = RequestMethod.POST )
     public String save(@PathVariable("id") int id, @RequestParam String name, @RequestParam String country)
     {
-        if(name=="" || country=="")
-        {
+        if (name == "" || country == "") {
             return "updateerror";
-        }
 
-        else if(name.length() > 20 || country.length() > 30)
-        {
+        } else if (name.length() > 20 || country.length() > 30) {
             return "updateerror";
-        }
 
-        else {
+        } else {
             Person dude = personDAO.findOne(id);
             dude.setName(name);
             dude.setCountry(country);
             personDAO.save(dude);
             return "redirect:/person";
+
         }
     }
 
@@ -122,7 +121,21 @@ public class HomeSweetHomeController {
             return "Update";
         }
     }
+/*
+    @RequestMapping(value="/search{id}" , method = RequestMethod.GET )
+    public String search(@RequestParam String id, ModelMap model)
+    {
+        if(personDAO.findByName(id)==null) {
+            return "searcherr"; // return something else, searchbyname
+        }
 
+        else {
+            Person person = personDAO.findByName(id);
+            model.put("person", person);
+            return "Update";
+        }
+    }
+    */
     @RequestMapping(value="/searchbyname", method = RequestMethod.POST)
     public String searchname(@RequestParam String name, ModelMap model)
     {

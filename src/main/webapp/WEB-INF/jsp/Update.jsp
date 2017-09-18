@@ -67,6 +67,7 @@
         }
     }
 </style>
+<c:url var="searchAction" value="/search{id}" ></c:url>
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">

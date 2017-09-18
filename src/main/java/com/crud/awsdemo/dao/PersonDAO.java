@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Repository
 public interface PersonDAO extends JpaRepository<Person, Integer>{
 
-    List<Person> findByName(String name);
+    Person findByName(String name);
     Page findAll(Pageable pageable);
 
 }
