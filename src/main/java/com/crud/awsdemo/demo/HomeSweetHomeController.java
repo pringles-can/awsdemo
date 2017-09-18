@@ -9,10 +9,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.crud.awsdemo.spring.model.Person;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -102,7 +104,14 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/person/add", method = RequestMethod.POST)
-    public String addPerson(@RequestParam String name, @RequestParam String country) {
+    public String addPerson(@RequestParam @Valid String name, BindingResult bindingResult, @RequestParam String country) {
+
+        System.out.println("errors? " + bindingResult.hasErrors());
+
+        if (bindingResult.hasErrors()) { // make an error page
+            return "person";
+        }
+
         personDAO.save(new Person(name, country));
         return "redirect:/person";
         //return "redirect:/person/add";
@@ -147,8 +156,6 @@ public class HomeSweetHomeController {
 
 
     }
-
-
 
     @RequestMapping(value="/person/remove/{id}", method = RequestMethod.GET)
     public String removePerson(@PathVariable("id") int id) {
