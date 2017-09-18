@@ -100,23 +100,6 @@
 			<version>1.4</version>
 		</dependency>
 
-		<dependency>
-            <groupId>com.github.Ullink</groupId>
-            <artifactId>simple-slack-api</artifactId>
-            <version>1.0.0</version>
-		</dependency>
-
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.4.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-oxm</artifactId>
-        </dependency>
-
 	</dependencies>
 
 	<build>
