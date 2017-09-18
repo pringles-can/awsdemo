@@ -104,13 +104,13 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/person/add", method = RequestMethod.POST)
-    public String addPerson(@RequestParam @Valid String name, BindingResult bindingResult, @RequestParam String country) {
+    public String addPerson(@RequestParam @Valid String name, @RequestParam String country) {
 
-        System.out.println("errors? " + bindingResult.hasErrors());
+        /*System.out.println("errors? " + bindingResult.hasErrors());
 
         if (bindingResult.hasErrors()) { // make an error page
             return "person";
-        }
+        }*/
 
         personDAO.save(new Person(name, country));
         return "redirect:/person";
