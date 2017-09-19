@@ -17,7 +17,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>Person</title>
 
@@ -30,7 +29,17 @@
 
 
 <style type="text/css">
+    .error{
+        color: #ff0000;
+    }
 
+    .errorblock {
+        color: #000;
+        background-color: #ffEEEE;
+        border: 3px solid #ff0000;
+        padding: 8px;
+        margin: 16px;
+    }
 </style>
 
 <body>
@@ -38,12 +47,12 @@
 <script type="text/javascript" src="http://twitter.github.io/bootstrap/assets/js/bootstrap-collapse.js"></script>
 
 <p></p>
-
-
 <p></p>
 
-
 <table>
+    <form:errors path="*" cssClass="errorblock" element="div">
+
+    </form:errors>
 
     <style type="text/css">
 
@@ -53,6 +62,7 @@
         <table class="tg">
             <tr>
                 <th class="tg-mbw0">New Name:<input type="text" name="name" id="id18" placeholder="${person.name}"></th>
+                <td><form:errors path="name" cssClass="error"></form:errors> </td>
                 <th class="tg-mbw0">New fucking whatever:<input type="text" name="country" id="id19"
                                                                 placeholder="${person.country}"></th>
                 <th class="tg-mbw0"><input type="submit" id="id20"/></th>

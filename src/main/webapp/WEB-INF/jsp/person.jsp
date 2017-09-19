@@ -13,7 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
     <title>Person Page</title>
     <style type="text/css">
         .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc; cellpadding:10;
@@ -23,7 +22,6 @@
         .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0; cellpadding:10;
             cellspacing:10;}
         .tg .tg-4eph{background-color:#f9f9f9}
-
 
         a.button {
             background-color: #4CAF50; /* Green */
@@ -55,6 +53,26 @@
         }
         .value{
             margin: 10px 15px 10px 8px;
+        }
+
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+
+            .row.content {
+                height: auto;
+            }
         }
 
         .error{
@@ -92,10 +110,10 @@
         <form id="addForm" method = "post" action = "/person/person/add" >
             <table class="tg">
                 <tr>
-                    <th class="tg-mkpy">Add A person:</th>
-                    <th class="tg-mbw0"><input type="text" name = "name" id="id5" /></th>
-                    <th class="tg-mbw0"><input type="text" name = "country" id="id6" /></th>
-                    <th class="tg-mbw0"><input type="submit" id="id3" /></th>
+                    <butt class="tg-mkpy">Add A person:</butt>
+                    <butt class="tg-mbw0"><input type="text" name = "name" id="id5" /></butt>
+                    <butt class="tg-mbw0"><input type="text" name = "country" id="id6" /></butt>
+                    <butt class="tg-mbw0"><input type="submit" id="id3" /></butt>
                 </tr>
             </table>
         </form>

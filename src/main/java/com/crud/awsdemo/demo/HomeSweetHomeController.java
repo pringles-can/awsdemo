@@ -1,6 +1,7 @@
 package com.crud.awsdemo.demo;
 
 import com.crud.awsdemo.dao.PersonDAO;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +11,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.crud.awsdemo.spring.model.Person;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 
 
 @Controller
+@Validated
 public class HomeSweetHomeController {
 
 
@@ -50,8 +53,11 @@ public class HomeSweetHomeController {
     }
 
     //Model
+    @Valid
     @ModelAttribute("person")
-    public Page<Person> data(ModelMap model, @PageableDefault(value = 5, page = 0, sort = {"id"}) Pageable pageable) {
+    public Page<Person> data(ModelMap model,
+                             @PageableDefault(value = 5, page = 0, sort = {"id"}) Pageable pageable) {
+
         Page<Person> persons = personDAO.findAll(pageable);
         Page<Person> prsns = personDAO.findAll(new PageRequest(0, 20));
         listPersons = prsns.getContent();
@@ -79,12 +85,14 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/person/save/{id}", method = RequestMethod.POST )
-    public String save(@PathVariable("id") int id, @RequestParam String name, @RequestParam String country)
+    public String save(@PathVariable("id") int id, @Valid @RequestParam String name,
+                       @RequestParam String country)
     {
-        if (name == "" || country == "") {
+        /*if (name == "" || country == "") {
             return "updateerror";
 
-        } else if (name.length() > 20 || country.length() > 30) {
+        } else */
+            if (name.length() > 20 || country.length() > 30) {
             return "updateerror";
 
         } else {
@@ -104,13 +112,9 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/person/add", method = RequestMethod.POST)
-    public String addPerson(@RequestParam @Valid String name, @RequestParam String country) {
+    public String addPerson(@RequestParam String name, @RequestParam String country) {
 
-        /*System.out.println("errors? " + bindingResult.hasErrors());
 
-        if (bindingResult.hasErrors()) { // make an error page
-            return "person";
-        }*/
 
         personDAO.save(new Person(name, country));
         return "redirect:/person";

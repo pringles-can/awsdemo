@@ -1,5 +1,7 @@
 package com.crud.awsdemo.spring.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +27,7 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
+    @NotBlank(message = "NO BLANK NAMES")
     @Column(name="name")
     private String name;
 
