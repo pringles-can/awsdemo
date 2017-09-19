@@ -1,13 +1,9 @@
 package com.crud.awsdemo.spring.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Entity bean with JPA annotations
@@ -31,9 +27,10 @@ public class Person implements Serializable {
     @Column(name="country")
     private String country;
 
+    @OneToMany(mappedBy = "person") // mapped by person in Imag
+    private Set<Imag> imgs;
+
     public Person(int id, String name) {
-        //this.id = id;
-        //this.name = name;
 
     }
 
@@ -73,7 +70,13 @@ public class Person implements Serializable {
         this.country = country;
     }
 
+    public void setImgs(Set<Imag> imags) {
+        this.imgs = imags;
+    }
 
+    public Set<Imag> getImgs() {
+        return this.imgs;
+    }
 
     @Override
     public String toString() {
