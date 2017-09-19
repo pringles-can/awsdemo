@@ -1,7 +1,7 @@
 package com.crud.awsdemo.demo;
 
 import com.crud.awsdemo.dao.PersonDAO;
-import org.hibernate.validator.constraints.NotBlank;
+//import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import com.crud.awsdemo.spring.model.Person;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,11 +66,6 @@ public class HomeSweetHomeController {
         return persons;
     }
 
-    private void setListPersons(ArrayList<Person> lp) {
-        listPersons = lp;
-    }
-
-
 
     @RequestMapping(value="/person/edit/{id}" , method = RequestMethod.GET )
     public String savePerson(ModelMap model, @PathVariable("id") int id)
@@ -85,13 +80,13 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/person/save/{id}", method = RequestMethod.POST )
-    public String save(@PathVariable("id") int id, @Valid @RequestParam String name,
-                       @RequestParam String country)
-    {
-        /*if (name == "" || country == "") {
-            return "updateerror";
+    public String save(@PathVariable("id") int id,  @RequestParam String name,
+                        @RequestParam String country) {
 
-        } else */
+        /*if (bindingResult.hasErrors()) {
+            return "person";
+
+        } else*/
             if (name.length() > 20 || country.length() > 30) {
             return "updateerror";
 
@@ -113,8 +108,6 @@ public class HomeSweetHomeController {
 
     @RequestMapping(value="/person/add", method = RequestMethod.POST)
     public String addPerson(@RequestParam String name, @RequestParam String country) {
-
-
 
         personDAO.save(new Person(name, country));
         return "redirect:/person";
@@ -165,6 +158,17 @@ public class HomeSweetHomeController {
     public String removePerson(@PathVariable("id") int id) {
         personDAO.delete(id);
         return "redirect:/person";
+    }
+
+
+    public static class PrsnWrapper {
+
+        @Size(max=20)
+        private static String _name;
+        private static String _country;
+
+        public static void set_name(String n) { _name = n;}
+        public static void set_country(String c) { _country = c;}
     }
 
 }
