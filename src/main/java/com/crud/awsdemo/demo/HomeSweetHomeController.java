@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.crud.awsdemo.spring.model.Person;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
@@ -25,8 +26,6 @@ import java.util.stream.Collectors;
 @Controller
 @Validated
 public class HomeSweetHomeController {
-
-
 
     @Autowired
     PersonDAO personDAO;
@@ -111,7 +110,16 @@ public class HomeSweetHomeController {
 
         personDAO.save(new Person(name, country));
         return "redirect:/person";
-        //return "redirect:/person/add";
+    }
+
+
+
+    @RequestMapping(value="/imag/upload{id}", method = RequestMethod.POST)
+    public String uploadImg(ModelMap model, @PathVariable("id") int id) {
+        Person person = personDAO.findOne(id);
+        model.put("Person", person);
+
+        return "redirect:/person";
     }
 
     @RequestMapping(value="/search{id}" , method = RequestMethod.GET )

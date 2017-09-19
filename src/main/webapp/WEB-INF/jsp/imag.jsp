@@ -46,6 +46,7 @@
 
 <p></p>
 <p></p>
+<c:url var="uploadAction" value="/imag/upload" ></c:url>
 
 <table>
     <form:errors path="*" cssClass="errorblock" element="div">
@@ -56,13 +57,12 @@
 
     </style>
 
-    <form method="post" action="/person/save/${person.id}">
+    <form method="post" action="/imag/upload/${imag.id}">
         <table class="tg">
             <tr>
-                <th class="tg-mbw0">New Name:<input type="text" name="name" id="id18" placeholder="${person.name}"></th>
                 <td><form:errors path="name" cssClass="error"></form:errors> </td>
-                <th class="tg-mbw0">New fucking whatever:<input type="text" name="country" id="id19"
-                                                                placeholder="${person.country}"></th>
+                <th class="tg-mbw0">Upload an image, or don't:<input type="file" name="image" id="idImg"
+                                                                placeholder="${imag.image}"></th>
                 <th class="tg-mbw0"><input type="submit" id="id20"/></th>
             </tr>
         </table>
