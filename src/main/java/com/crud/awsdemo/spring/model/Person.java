@@ -3,6 +3,8 @@ package com.crud.awsdemo.spring.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,7 +19,7 @@ import java.util.Set;
 public class Person implements Serializable {
 
     @Id
-    @Column(name="id", nullable = false, insertable = false, updatable = true)
+    @Column(name="id", nullable = false, insertable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -27,8 +29,8 @@ public class Person implements Serializable {
     @Column(name="country")
     private String country;
 
-    @OneToMany(mappedBy = "person") // mapped by person in Imag
-    private Set<Imag> imgs;
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL) // mapped by person in Imag
+    private List<Imag> imgs;
 
     public Person(int id, String name) {
 
@@ -70,11 +72,12 @@ public class Person implements Serializable {
         this.country = country;
     }
 
-    public void setImgs(Set<Imag> imags) {
+    public void setImgs(List<Imag> imags) {
         this.imgs = imags;
     }
 
-    public Set<Imag> getImgs() {
+
+    public List<Imag> getImgs() {
         return this.imgs;
     }
 

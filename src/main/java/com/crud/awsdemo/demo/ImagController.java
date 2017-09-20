@@ -4,6 +4,7 @@ package com.crud.awsdemo.demo;
 import com.crud.awsdemo.dao.ImagDAO;
 import com.crud.awsdemo.spring.model.Imag;
 import com.crud.awsdemo.spring.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,7 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ImagController  {
+
+
     ImagDAO imagDAO;
+
+    @Autowired
+    public ImagController(ImagDAO imagDAO) {
+        this.imagDAO = imagDAO;
+    }
 
     @RequestMapping(value="piss/imag/upload{id}", method = RequestMethod.POST)
     public String uploadImg(ModelMap model, @PathVariable("id") int id) {

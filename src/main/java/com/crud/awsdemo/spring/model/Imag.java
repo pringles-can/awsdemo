@@ -8,8 +8,10 @@ import java.io.Serializable;
 @Table(name="imgs")
 public class Imag implements Serializable {
 
+
+
     @ManyToOne
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name="prsn_id", nullable=false, insertable=false, updatable=false)
     private Person person;
 
     @Id
@@ -19,6 +21,9 @@ public class Imag implements Serializable {
 
     @Column
     private byte[] img;
+
+    @Column
+    private int prsn_id;
 
     public Imag() {}
 
@@ -39,8 +44,28 @@ public class Imag implements Serializable {
     }
 
 
+    public Person getPerson() {
+        return person;
+    }
 
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPrsn_id() {
+        return prsn_id;
+    }
+
+    public void setPrsn_id(int prsn_id) {
+        this.prsn_id = prsn_id;
+    }
 
 }
