@@ -41,8 +41,6 @@ public class Person implements Serializable {
         this.country= country;
     }
 
-
-
     // default; totally works, the debugger's full of shit
     protected Person(){
 

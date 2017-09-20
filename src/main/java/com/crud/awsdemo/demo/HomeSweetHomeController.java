@@ -112,9 +112,6 @@ public class HomeSweetHomeController {
         return "redirect:/person";
     }
 
-
-
-
     @RequestMapping(value="/imag/upload/{id}", method = RequestMethod.GET)
     public String uploadImg(ModelMap model, @PathVariable("id") int id) {
         Person person = personDAO.findOne(id);
