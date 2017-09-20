@@ -1,7 +1,9 @@
 package com.crud.awsdemo.demo;
 
+import com.crud.awsdemo.dao.ImagDAO;
 import com.crud.awsdemo.dao.PersonDAO;
 //import org.hibernate.validator.constraints.NotBlank;
+import com.crud.awsdemo.spring.model.Imag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +31,9 @@ public class HomeSweetHomeController {
 
     @Autowired
     PersonDAO personDAO;
+
+    @Autowired
+    ImagDAO imagDAO;
 
     private String imgUrl;
     private List<Person> listPersons;
@@ -114,9 +119,9 @@ public class HomeSweetHomeController {
 
     @RequestMapping(value="/imag/upload/{id}", method = RequestMethod.GET)
     public String uploadImg(ModelMap model, @PathVariable("id") int id) {
-        Person person = personDAO.findOne(id);
-        model.put("Person", person);
-
+        //Person person = personDAO.findOne(id);
+        //personDAO.save()
+        model.put("prsn_id", id);
         return "imag";
     }
 

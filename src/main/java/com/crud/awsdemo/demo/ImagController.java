@@ -29,13 +29,25 @@ public class ImagController  {
         this.imagDAO = imagDAO;
     }
 
-    @RequestMapping(value="/imag/upload", method = RequestMethod.POST)
-    public String uploadImg(@RequestParam byte[] image) {
-        imagDAO.save(new Imag(image));
+    @RequestMapping(value="/imag/upload/{prsn_id}", method = RequestMethod.POST)
+    public String uploadImg( ModelMap model, @PathVariable("prsn_id") int id, @RequestParam byte[] image) {
+        Imag img = new Imag(image);
+        img.setPrsn_id(id);
+        imagDAO.save(img);
 
-        //person.getImgs().add()
-        //person.getImgs().add(image);
         return "redirect:/person";
+    }
+
+    @RequestMapping(value="/imag/save/{prsn_id}" , method = RequestMethod.GET )
+    public String savePerson(ModelMap model, @PathVariable("id") int id)
+    {
+
+        Person person = personDAO.findOne(id);
+        personDAO.save(person);
+        model.put("Imag", person);
+
+        return "Update";
+
     }
 
     /*@RequestMapping(value="/imag/associate{id}", method=RequestMethod.GET)

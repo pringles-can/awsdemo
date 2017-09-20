@@ -46,7 +46,7 @@
 
 <p></p>
 <p></p>
-<c:url var="uploadAction" value="/imag/upload" ></c:url>
+<c:url var="uploadAction" value="/imag/upload/${prsn_id}" ></c:url>
 
 <table>
     <form:errors path="*" cssClass="errorblock" element="div">
@@ -60,7 +60,7 @@
     <%--@elvariable id="imag" type="com.crud.awsdemo.spring.model.Imag"--%>
     <form:form action="${uploadAction}" commandName="imag">
         <table>
-            <form method="post" action="/imag/upload">
+            <form method="post" action="/imag/upload/${prsn_id}">
                 <table class="tg">
                     <tr>
                         <th class="tg-mbw0">Upload an image, or don't:<input type="file" name="image" id="idImg"></th>
