@@ -11,7 +11,7 @@ public class Imag implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name="prsn_id", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="prsn_id", referencedColumnName = "id", nullable=false, insertable=false, updatable=false)
     private Person person;
 
     @Id

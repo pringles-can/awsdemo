@@ -57,16 +57,22 @@
 
     </style>
 
-    <form method="post" action="/imag/upload/${imag.id}">
-        <table class="tg">
-            <tr>
-                <td><form:errors path="name" cssClass="error"></form:errors> </td>
-                <th class="tg-mbw0">Upload an image, or don't:<input type="file" name="image" id="idImg"
-                                                                placeholder="${imag.image}"></th>
-                <th class="tg-mbw0"><input type="submit" id="id20"/></th>
-            </tr>
+    <%--@elvariable id="imag" type="com.crud.awsdemo.spring.model.Imag"--%>
+    <form:form action="${uploadAction}" commandName="imag">
+        <table>
+            <form method="post" action="/imag/upload">
+                <table class="tg">
+                    <tr>
+                        <th class="tg-mbw0">Upload an image, or don't:<input type="file" name="image" id="idImg"></th>
+                        <th class="tg-mbw0"><input type="submit" id="id210"/></th>
+                    </tr>
+                </table>
+            </form>
         </table>
-    </form>
+
+    </form:form>
+
+
 
 </table>
 

@@ -128,6 +128,7 @@
 
 <c:url var="remAction" value="/person/remove/{id}" ></c:url>
 <c:url var="editAction" value="/person/edit/{id}" ></c:url>
+<c:url var="imagAction" value="/imag/upload/{id}" ></c:url>
 <h3>Persons List</h3>
 <%--@elvariable id="person" type="com.crud.awsdemo.spring.model.Person"--%>
 
@@ -145,8 +146,8 @@
                 <td>${person.name}</td>
                 <td>${person.country}</td>
                 <td><a href="<c:url value='/person/edit/${person.id}' />"  class="button">Edit</a>
-                    <a href="<c:url value='/person/remove/${person.id}' />"  class="btn" id="removeButton">Delete
-                    </a>
+                    <a href="<c:url value='/person/remove/${person.id}' />"  class="btn" id="removeButton">Delete</a>
+                    <a href="<c:url value='/imag/upload/${person.id}' />"  class="button">Upload Pic</a>
                 </td>
             </tr>
         </c:forEach>

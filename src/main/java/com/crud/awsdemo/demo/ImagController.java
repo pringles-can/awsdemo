@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ImagController  {
@@ -23,10 +24,9 @@ public class ImagController  {
         this.imagDAO = imagDAO;
     }
 
-    @RequestMapping(value="piss/imag/upload{id}", method = RequestMethod.POST)
-    public String uploadImg(ModelMap model, @PathVariable("id") int id) {
-        Imag imag = imagDAO.findOne(id);
-        model.put("Imag", imag);
+    @RequestMapping(value="/imag/upload", method = RequestMethod.POST)
+    public String uploadImg(@RequestParam byte[] image) {
+        imagDAO.save(new Imag(image));
 
         return "redirect:/person";
     }

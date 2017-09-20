@@ -76,7 +76,6 @@ public class Person implements Serializable {
         this.imgs = imags;
     }
 
-
     public List<Imag> getImgs() {
         return this.imgs;
     }
