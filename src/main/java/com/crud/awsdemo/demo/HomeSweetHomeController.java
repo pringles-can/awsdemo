@@ -37,6 +37,7 @@ public class HomeSweetHomeController {
     private String imgUrl;
     private List<Person> listPersons;
 
+
     public void setImgUrl(String url) {
         this.imgUrl = url;
     }
@@ -131,9 +132,12 @@ public class HomeSweetHomeController {
         else {
             Person person = personDAO.findOne(id);
             model.put("person", person);
+
             return "Update";
         }
     }
+
+
 /*
     @RequestMapping(value="/search{id}" , method = RequestMethod.GET )
     public String search(@RequestParam String id, ModelMap model)
