@@ -138,7 +138,7 @@
             <th width="80">ID</th>
             <th width="120">Person Name</th>
             <th width="120">RANDOM FUCKING TEXT</th>
-            <th width="60">Action</th>
+            <th width="340">Action</th>
         </tr>
         <c:forEach items="${listPersons}" var="person">
             <tr>

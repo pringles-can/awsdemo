@@ -17,7 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.crud.awsdemo.spring.model.Person;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
@@ -61,7 +60,6 @@ public class HomeSweetHomeController {
     @ModelAttribute("person")
     public Page<Person> data(ModelMap model,
                              @PageableDefault(value = 5, page = 0, sort = {"id"}) Pageable pageable) {
-
         Page<Person> persons = personDAO.findAll(pageable);
         Page<Person> prsns = personDAO.findAll(new PageRequest(0, 20));
         listPersons = prsns.getContent();
@@ -119,8 +117,6 @@ public class HomeSweetHomeController {
 
     @RequestMapping(value="/imag/upload/{id}", method = RequestMethod.GET)
     public String uploadImg(ModelMap model, @PathVariable("id") int id) {
-        //Person person = personDAO.findOne(id);
-        //personDAO.save()
         model.put("prsn_id", id);
         return "imag";
     }
