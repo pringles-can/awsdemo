@@ -12,14 +12,20 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.Base64Utils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.crud.awsdemo.spring.model.Person;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +43,8 @@ public class HomeSweetHomeController {
     private String imgUrl;
     private List<Person> listPersons;
 
+    private List<Imag> listImages;
+    private List<byte[]> personImages;
 
     public void setImgUrl(String url) {
         this.imgUrl = url;
@@ -123,7 +131,8 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/search{id}" , method = RequestMethod.GET )
-    public String search(@RequestParam int id, ModelMap model)
+    public String search(@RequestParam int id, ModelMap model, HttpServletResponse response, HttpServletRequest request)
+            throws ServletException, IOException
     {
         if(personDAO.findOne(id)==null) {
             return "searcherr"; // return something else, searchbyname
@@ -133,26 +142,24 @@ public class HomeSweetHomeController {
             Person person = personDAO.findOne(id);
             model.put("person", person);
 
+            listImages = imagDAO.findAll();
+            personImages = imagDAO.findAllById(id);
+            List<String> convImages = new ArrayList<>();
+
+
+            for(byte[] imag : personImages) {
+                //byte[] imageArray = Base64Utils.encode(imag);
+                String base64Image = Base64Utils.encodeToString(imag);
+                model.put("personImag", imag);
+                convImages.add(base64Image);
+            }
+
+            model.put("personImages", convImages);
+
             return "Update";
         }
     }
 
-
-/*
-    @RequestMapping(value="/search{id}" , method = RequestMethod.GET )
-    public String search(@RequestParam String id, ModelMap model)
-    {
-        if(personDAO.findByName(id)==null) {
-            return "searcherr"; // return something else, searchbyname
-        }
-
-        else {
-            Person person = personDAO.findByName(id);
-            model.put("person", person);
-            return "Update";
-        }
-    }
-    */
     @RequestMapping(value="/searchbyname", method = RequestMethod.POST)
     public String searchname(@RequestParam String name, ModelMap model)
     {

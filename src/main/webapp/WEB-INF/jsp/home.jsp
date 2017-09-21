@@ -87,8 +87,8 @@
                 <p>Some people might be listed below</p>
                 <table class="table table-bordered">
                     <c:if test="${!empty listPersons}">
-                        <tr>
-                            <td class="tg-5919" style=border-color:#ccc;color:#333;>ID</td>
+                        <tr style="border-color:#ccc;color:#333;">
+                            <td class="tg-5919">ID</td>
                             <td class="tg-5919">Name</td>
                             <td class="tg-5919">RANDOM FUCKING TEXT</td>
                         </tr>

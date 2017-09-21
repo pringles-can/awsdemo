@@ -70,6 +70,10 @@
 
             <img src="" alt=""/>
         </table>
+
+    </form>
+
+    <table>
         <div class="container-fluid text-center">
             <div class="row content">
                 <div class="container">
@@ -77,26 +81,17 @@
                     <p></p>
                     <table class="table table-bordered">
                         <c:if test="${!empty personImages}">
-                            <c:forEach items="${personImages.content}" var="personImage">
-                                <tr>
-                                    <td class="tg-d7nh">${personImage.id}</td>
-                                    <td class="tg-d7nh">${personImage.img}</td>
-                                    <td class="tg-jnuu">${personImage.prsn_id}</td>
+                            <td class="tg-jnuu"><img src="data:image/jpeg;base64,${personImages.get(3)}"/></td>
 
-                                </tr>
-                            </c:forEach>
-                        <tr>
-                            <td class="tg-5919" style=border-color:#ccc;color:#333;>ID</td>
-                        </tr>
+
+                            <tr>
+                                <td class="tg-5919" style=border-color:#ccc;color:#333;>ID</td>
+                            </tr>
                         </c:if>
                     </table>
                 </div>
             </div>
         </div>
-    </form>
-
-    <table>
-
     </table>
 
 </table>

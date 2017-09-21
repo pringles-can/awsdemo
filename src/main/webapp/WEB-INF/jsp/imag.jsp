@@ -58,9 +58,9 @@
     </style>
 
     <%--@elvariable id="imag" type="com.crud.awsdemo.spring.model.Imag"--%>
-    <form:form action="${uploadAction}" commandName="imag">
+    <form:form action="${uploadAction}" commandName="imag" enctype="multipart/form-data">
         <table>
-            <form method="post" action="/imag/upload/${prsn_id}">
+            <form method="post" action="/imag/upload/${prsn_id}" enctype="multipart/form-data">
                 <table class="tg">
                     <tr>
                         <th class="tg-mbw0">Upload an image, or don't:<input type="file" name="image" id="idImg"></th>

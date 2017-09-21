@@ -9,9 +9,17 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -34,28 +42,50 @@ public class ImagController  {
     }
 
 
-    @ModelAttribute("personImage")
+    /*@ModelAttribute("personImages")
+    @RequestMapping(value = "/imag/populate")
     public void imagData(ModelMap model) { // make onLoad() or some shit in the Update view, map to something here
         //List<Imag> listImages = imagDAO.findAll();
-        model.addAttribute("listImages", listImages);
+        model.addAttribute("personImages", personImages);
 
-    }
+    }*/
 
-    @RequestMapping(value = "/imag/load/{prsn_id}", method = RequestMethod.GET)
-    public void onLoad(ModelMap model, @PathVariable("id") int id) {
+
+/*
+    @RequestMapping(value = "/imag/lode", method = RequestMethod.GET)
+    public void onLoad(ModelMap model, @RequestParam("id") int id,
+                       HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         listImages = imagDAO.findAll();
         personImages = imagDAO.findAllById(id);
+        List<String> convImages = new ArrayList<>();
+        Person person = personDAO.findOne(id);
 
-        model.put("personImages", personImages);
+        response.setContentType("image/jpeg, image/jpg, image/png");
+        for(Imag imag : personImages) {
+            response.getOutputStream().write(imag.getImg());
+            byte[] imageArray = Base64Utils.encode(imag.getImg());
+            String base64Image = new String(imageArray, "UTF-8");
+            model.put("personImag", imag);
+            convImages.add(base64Image);
+        }
+        response.getOutputStream().close();
+        model.put("personImages", convImages);
 
-    }
+    }*/
 
     @RequestMapping(value="/imag/upload/{prsn_id}", method = RequestMethod.POST)
-    public String uploadImg( ModelMap model, @PathVariable("prsn_id") int id, @RequestParam byte[] image) {
-        Imag img = new Imag(image);
+    public String uploadImg( @PathVariable("prsn_id") int id, @RequestParam MultipartFile image)
+    throws IOException {
+        //Imag img = new Imag(image);
+        //img.setPrsn_id(id);
+        //imagDAO.save(img);
+
+        Imag img = new Imag(image.getBytes());
         img.setPrsn_id(id);
         imagDAO.save(img);
 
+        int x = 5;
         return "redirect:/person";
     }
 
