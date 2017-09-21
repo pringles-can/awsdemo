@@ -81,12 +81,11 @@
                     <p></p>
                     <table class="table table-bordered">
                         <c:if test="${!empty personImages}">
-                            <td class="tg-jnuu"><img src="data:image/jpeg;base64,${personImages.get(3)}"/></td>
-
-
+                            <c:forEach items="${personImages}" var="person" varStatus="loop">
+                            <td class="tg-jnuu"><img src="data:image/jpeg;base64,${personImages.get(loop.index)}"/></td>
                             <tr>
-                                <td class="tg-5919" style=border-color:#ccc;color:#333;>ID</td>
                             </tr>
+                            </c:forEach>
                         </c:if>
                     </table>
                 </div>
