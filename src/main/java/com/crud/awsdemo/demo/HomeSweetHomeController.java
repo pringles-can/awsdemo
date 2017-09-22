@@ -136,6 +136,22 @@ public class HomeSweetHomeController {
             throws ServletException, IOException {
 
         if(personDAO.findOne(id)==null) {
+
+            return "searcherr"; // return something else, searchbyname
+        }
+
+        else {
+            showPics(id, model);
+            return "Update";
+        }
+    }
+
+    @RequestMapping(value="/search" , method = RequestMethod.GET )
+    public String search(@RequestParam String id, ModelMap model)
+            throws ServletException, IOException {
+
+        if(personDAO.findByName(id)==null) {
+
             return "searcherr"; // return something else, searchbyname
         }
 
@@ -144,6 +160,28 @@ public class HomeSweetHomeController {
 
             return "Update";
         }
+    }
+
+    private String showPics(String id, ModelMap model) {
+        int prsn_id = 0;
+        Person person = personDAO.findByName(id);
+        prsn_id = person.getId();
+
+        model.put("person", person);
+
+        listImages = imagDAO.findAll();
+        personImages = imagDAO.findAllById(prsn_id);
+        List<String> convImages = new ArrayList<>();
+
+        for(byte[] imag : personImages) {
+            String base64Image = Base64Utils.encodeToString(imag);
+            model.put("personImag", imag);
+            convImages.add(base64Image);
+        }
+
+        model.put("personImages", convImages);
+
+        return "Update";
     }
 
     private String showPics(int id, ModelMap model) {

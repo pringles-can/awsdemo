@@ -58,10 +58,10 @@
     <form method="post" action="/person/save/${person.id}">
         <table class="tg">
             <tr>
-                <th class="tg-mbw0">New Name:<input type="text" name="name" id="id18" placeholder="${person.name}"></th>
+                <th class="tg-mbw0">New Name:<input type="text" name="name" id="id18" value="${person.name}"></th>
                 <td><form:errors path="name" cssClass="error"></form:errors> </td>
                 <th class="tg-mbw0">New fucking whatever:<input type="text" name="country" id="id19"
-                                                                placeholder="${person.country}"></th>
+                                                                value="${person.country}"></th>
                 <th class="tg-mbw0"><input type="submit" id="id20"/></th>
             </tr>
 
