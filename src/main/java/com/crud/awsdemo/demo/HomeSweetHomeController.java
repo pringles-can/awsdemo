@@ -181,20 +181,9 @@ public class HomeSweetHomeController {
     @RequestMapping(value="/person/remove/{id}", method = RequestMethod.GET)
     public String removePerson(@PathVariable("id") int id, ModelMap model) {
         personDAO.delete(id);
-        showPics(id, model);
+        //showPics(id, model);
 
         return "redirect:/person";
-    }
-
-
-    public static class PrsnWrapper {
-
-        @Size(max=20)
-        private static String _name;
-        private static String _country;
-
-        public static void set_name(String n) { _name = n;}
-        public static void set_country(String c) { _country = c;}
     }
 
 }
