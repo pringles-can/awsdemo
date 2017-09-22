@@ -2,9 +2,7 @@ package com.crud.awsdemo.demo;
 
 import com.crud.awsdemo.dao.ImagDAO;
 import com.crud.awsdemo.dao.PersonDAO;
-//import org.hibernate.validator.constraints.NotBlank;
 import com.crud.awsdemo.spring.model.Imag;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,17 +12,14 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Base64Utils;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.crud.awsdemo.spring.model.Person;
 
+import javax.persistence.NonUniqueResultException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import javax.validation.constraints.Size;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -135,40 +130,33 @@ public class HomeSweetHomeController {
     public String search(@RequestParam String id, ModelMap model)
             throws ServletException, IOException {
 
-        if(personDAO.findByName(id)==null) {
-            int intId = Integer.parseInt(id); // fucking boxing
-            if (personDAO.findOne(intId) != null) {
-                showPics(intId, model);
+        try {
+            if(personDAO.findByName(id)==null) {
+                int intId = Integer.parseInt(id); // fucking boxing
+                if (personDAO.findOne(intId) != null) {
+                    showPics(intId, model);
+                    return "Update";
+                }
+
+                return "aintShitFound"; // return something else, searchbyname
+            }
+            else {
+
+                showPics(id, model);
                 return "Update";
             }
-
-            return "aintShitFound"; // return something else, searchbyname
+        } catch (NonUniqueResultException nure) {
+            List<Person> listP = personDAO.findAll();
+            List<Person> persons = listP.stream().filter(x ->
+                    x.getName().toUpperCase().contains(id.toUpperCase())).collect(Collectors.toList());
+            model.put("persons", persons);
         }
-
-        else {
-            showPics(id, model);
-            return "Update";
-        }
+        return "horseshit";
     }
-
-    /*@RequestMapping(value="/search{name}" , method = RequestMethod.GET )
-    public String search(@RequestParam String name, ModelMap model)
-            throws ServletException, IOException {
-
-        if(personDAO.findByName(name)==null) {
-
-            return "searcherr"; // return something else, searchbyname
-        }
-
-        else {
-            showPics(name, model);
-
-            return "Update";
-        }
-    }*/
 
     private String showPics(String id, ModelMap model) {
         int prsn_id = 0;
+
         Person person = personDAO.findByName(id);
         prsn_id = person.getId();
 
@@ -207,19 +195,6 @@ public class HomeSweetHomeController {
 
         return "Update";
     }
-
-    @RequestMapping(value="/searchbyname", method = RequestMethod.POST)
-    public String searchname(@RequestParam String name, ModelMap model)
-    {
-        List<Person> listP = personDAO.findAll();
-        List<Person> persons =
-                listP.stream().filter(x -> x.getName().toUpperCase().contains(name.toUpperCase())).collect(Collectors.toList());
-        model.put("persons", persons);
-        return "home";
-
-
-    }
-
 
     @RequestMapping(value="/person/remove/{id}", method = RequestMethod.GET)
     public String removePerson(@PathVariable("id") int id, ModelMap model) {
