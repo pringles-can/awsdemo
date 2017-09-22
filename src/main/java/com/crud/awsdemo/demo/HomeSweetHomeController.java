@@ -183,6 +183,7 @@ public class HomeSweetHomeController {
     public String removePerson(@PathVariable("id") int id, ModelMap model) {
         personDAO.delete(id);
         showPics(id, model);
+        
         return "redirect:/person";
     }
 
