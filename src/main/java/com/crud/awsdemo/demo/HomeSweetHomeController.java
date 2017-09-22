@@ -4,6 +4,7 @@ import com.crud.awsdemo.dao.ImagDAO;
 import com.crud.awsdemo.dao.PersonDAO;
 //import org.hibernate.validator.constraints.NotBlank;
 import com.crud.awsdemo.spring.model.Imag;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -85,7 +86,7 @@ public class HomeSweetHomeController {
         Person person = personDAO.findOne(id);
         personDAO.save(person);
         model.put("person", person);
-
+        showPics(id, model);
         return "Update";
 
     }
@@ -131,32 +132,38 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/search{id}" , method = RequestMethod.GET )
-    public String search(@RequestParam int id, ModelMap model, HttpServletResponse response, HttpServletRequest request)
-            throws ServletException, IOException
-    {
+    public String search(@RequestParam int id, ModelMap model)
+            throws ServletException, IOException {
+
         if(personDAO.findOne(id)==null) {
             return "searcherr"; // return something else, searchbyname
         }
 
         else {
-            Person person = personDAO.findOne(id);
-            model.put("person", person);
-
-            listImages = imagDAO.findAll();
-            personImages = imagDAO.findAllById(id);
-            List<String> convImages = new ArrayList<>();
-
-            for(byte[] imag : personImages) {
-                //byte[] imageArray = Base64Utils.encode(imag);
-                String base64Image = Base64Utils.encodeToString(imag);
-                model.put("personImag", imag);
-                convImages.add(base64Image);
-            }
-
-            model.put("personImages", convImages);
+            showPics(id, model);
 
             return "Update";
         }
+    }
+
+    private String showPics(int id, ModelMap model) {
+        Person person = personDAO.findOne(id);
+        model.put("person", person);
+
+        listImages = imagDAO.findAll();
+        personImages = imagDAO.findAllById(id);
+        List<String> convImages = new ArrayList<>();
+
+        for(byte[] imag : personImages) {
+            //byte[] imageArray = Base64Utils.encode(imag);
+            String base64Image = Base64Utils.encodeToString(imag);
+            model.put("personImag", imag);
+            convImages.add(base64Image);
+        }
+
+        model.put("personImages", convImages);
+
+        return "Update";
     }
 
     @RequestMapping(value="/searchbyname", method = RequestMethod.POST)
@@ -171,9 +178,11 @@ public class HomeSweetHomeController {
 
     }
 
+
     @RequestMapping(value="/person/remove/{id}", method = RequestMethod.GET)
-    public String removePerson(@PathVariable("id") int id) {
+    public String removePerson(@PathVariable("id") int id, ModelMap model) {
         personDAO.delete(id);
+        showPics(id, model);
         return "redirect:/person";
     }
 
