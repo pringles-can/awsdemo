@@ -21,10 +21,7 @@
     <title>Person</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
 </head>
 
 
@@ -82,7 +79,7 @@
                     <table class="table table-bordered">
                         <c:if test="${!empty personImages}">
                             <c:forEach items="${personImages}" var="person" varStatus="loop">
-                            <td class="tg-jnuu"><img src="data:image/jpeg;base64,${personImages.get(loop.index)}"/></td>
+                            <td class="tg-jnuu"><img src="data:image/jpeg;base64,${personImages.get(loop.index)}" heigh="256" width="256"/></td>
                             <tr>
                             </tr>
                             </c:forEach>

@@ -146,7 +146,6 @@ public class HomeSweetHomeController {
             personImages = imagDAO.findAllById(id);
             List<String> convImages = new ArrayList<>();
 
-
             for(byte[] imag : personImages) {
                 //byte[] imageArray = Base64Utils.encode(imag);
                 String base64Image = Base64Utils.encodeToString(imag);
