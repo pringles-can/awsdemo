@@ -136,9 +136,9 @@ public class HomeSweetHomeController {
             throws ServletException, IOException {
 
         if(personDAO.findByName(id)==null) {
-            int fuckingIntId = Integer.parseInt(id);
-            if (personDAO.findOne(fuckingIntId) != null) {
-                showPics(fuckingIntId, model);
+            int intId = Integer.parseInt(id); // fucking boxing
+            if (personDAO.findOne(intId) != null) {
+                showPics(intId, model);
                 return "Update";
             }
 
