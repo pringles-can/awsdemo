@@ -132,35 +132,40 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/search{id}" , method = RequestMethod.GET )
-    public String search(@RequestParam int id, ModelMap model)
-            throws ServletException, IOException {
-
-        if(personDAO.findOne(id)==null) {
-
-            return "searcherr"; // return something else, searchbyname
-        }
-
-        else {
-            showPics(id, model);
-            return "Update";
-        }
-    }
-
-    @RequestMapping(value="/search" , method = RequestMethod.GET )
     public String search(@RequestParam String id, ModelMap model)
             throws ServletException, IOException {
 
         if(personDAO.findByName(id)==null) {
+            int fuckingIntId = Integer.parseInt(id);
+            if (personDAO.findOne(fuckingIntId) != null) {
+                showPics(fuckingIntId, model);
+                return "Update";
+            }
+
+            return "aintShitFound"; // return something else, searchbyname
+        }
+
+        else {
+            showPics(id, model);
+            return "Update";
+        }
+    }
+
+    /*@RequestMapping(value="/search{name}" , method = RequestMethod.GET )
+    public String search(@RequestParam String name, ModelMap model)
+            throws ServletException, IOException {
+
+        if(personDAO.findByName(name)==null) {
 
             return "searcherr"; // return something else, searchbyname
         }
 
         else {
-            showPics(id, model);
+            showPics(name, model);
 
             return "Update";
         }
-    }
+    }*/
 
     private String showPics(String id, ModelMap model) {
         int prsn_id = 0;
