@@ -155,7 +155,6 @@ public class HomeSweetHomeController {
         List<String> convImages = new ArrayList<>();
 
         for(byte[] imag : personImages) {
-            //byte[] imageArray = Base64Utils.encode(imag);
             String base64Image = Base64Utils.encodeToString(imag);
             model.put("personImag", imag);
             convImages.add(base64Image);
