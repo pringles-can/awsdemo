@@ -2,10 +2,9 @@ package com.crud.awsdemo.spring.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Entity bean with JPA annotations
@@ -23,6 +22,7 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull
     @Column(name="name")
     private String name;
 

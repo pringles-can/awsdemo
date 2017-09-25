@@ -12,6 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Base64Utils;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -87,13 +88,13 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/person/save/{id}", method = RequestMethod.POST )
-    public String save(@PathVariable("id") int id,  @RequestParam String name,
+    public String save(@PathVariable("id") int id, @Valid @RequestParam String name, BindingResult bindingResult,
                         @RequestParam String country) {
 
-        /*if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "person";
 
-        } else*/
+        } else
             if (name.length() > 20 || country.length() > 30) {
             return "updateerror";
 
