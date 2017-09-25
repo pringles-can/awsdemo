@@ -144,7 +144,8 @@ public class HomeSweetHomeController {
             throws ServletException, IOException {
 
         try {
-            if(personDAO.findByName(id)==null) {
+
+            if(personDAO.findByNameIgnoringCase(id)==null) {
                 int intId = Integer.parseInt(id); // fucking boxing
                 if (personDAO.findOne(intId) != null) {
                     showPics(intId, model);
@@ -154,15 +155,17 @@ public class HomeSweetHomeController {
                 return "aintShitFound"; // return something else, searchbyname
             }
             else {
-
-                showPics(id, model);
+                List<Person> listP = personDAO.findAll();
+                List<Person> persons = listP.stream().filter(prsn ->
+                        prsn.getName().toUpperCase().contains(id.toUpperCase())).collect(Collectors.toList());
+                for (Person person : persons) {
+                    showPics(person.getId(), model);
+                }
+                //showPics(id, model);
                 return "Update";
             }
         } catch (NonUniqueResultException nure) {
-            List<Person> listP = personDAO.findAll();
-            List<Person> persons = listP.stream().filter(x ->
-                    x.getName().toUpperCase().contains(id.toUpperCase())).collect(Collectors.toList());
-            model.put("persons", persons);
+            //
         }
         return "horseshit";
     }
@@ -170,7 +173,7 @@ public class HomeSweetHomeController {
     private String showPics(String id, ModelMap model) {
         int prsn_id = 0;
 
-        Person person = personDAO.findByName(id);
+        Person person = personDAO.findByNameIgnoringCase(id);
         prsn_id = person.getId();
 
         model.put("person", person);

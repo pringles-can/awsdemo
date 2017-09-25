@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonDAO extends JpaRepository<Person, Integer>{
 
-    Person findByName(String name);
+    Person findByNameIgnoringCase(String name);
     Page findAll(Pageable pageable);
 
 }
