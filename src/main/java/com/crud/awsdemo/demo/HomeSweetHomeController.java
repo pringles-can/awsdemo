@@ -70,10 +70,19 @@ public class HomeSweetHomeController {
         Page<Person> prsns = personDAO.findAll(new PageRequest(0, 20));
         listPersons = prsns.getContent();
 
-        model.addAttribute("listPersons", listPersons);
+        if (!listPersons.isEmpty()) {
+            model.addAttribute("listPersons", listPersons);
+            for (Person person : listPersons) {
+                model.addAttribute("name", person.getName());
+                model.addAttribute("id", person.getId());
+                model.addAttribute("country", person.getCountry());
+                model.addAttribute("imgs", person.getImgs());
+            }
+        }
+
+        //model.addAttribute("listPersons", listPersons);
         return persons;
     }
-
 
     @RequestMapping(value="/person/edit/{id}" , method = RequestMethod.GET )
     public String savePerson(ModelMap model, @PathVariable("id") int id)
@@ -82,21 +91,24 @@ public class HomeSweetHomeController {
         Person person = personDAO.findOne(id);
         personDAO.save(person);
         model.put("person", person);
+
         showPics(id, model);
         return "Update";
 
     }
 
-    @RequestMapping(value="/person/save/{id}", method = RequestMethod.POST )
-    public String save(@PathVariable("id") int id, @Valid @RequestParam String name, BindingResult bindingResult,
-                        @RequestParam String country) {
 
-        if (bindingResult.hasErrors()) {
+    @RequestMapping(value="/person/save/{id}", method = RequestMethod.POST )
+    public String save(@PathVariable("id") int id, @RequestParam String name,
+                       @RequestParam String country) {
+
+        if (name.isEmpty()) {
+            System.out.println("shit's fucked");
             return "person";
 
         } else
             if (name.length() > 20 || country.length() > 30) {
-            return "updateerror";
+            return "person";
 
         } else {
             Person dude = personDAO.findOne(id);

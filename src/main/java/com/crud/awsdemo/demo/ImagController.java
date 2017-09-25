@@ -77,22 +77,21 @@ public class ImagController  {
     @RequestMapping(value="/imag/upload/{prsn_id}", method = RequestMethod.POST)
     public String uploadImg( @PathVariable("prsn_id") int id, @RequestParam MultipartFile image)
     throws IOException {
-        //Imag img = new Imag(image);
-        //img.setPrsn_id(id);
-        //imagDAO.save(img);
 
-        Imag img = new Imag(image.getBytes());
-        img.setPrsn_id(id);
-        imagDAO.save(img);
 
-        int x = 5;
+        if (image.isEmpty()) {
+            return "person";
+        } else {
+            Imag img = new Imag(image.getBytes());
+            img.setPrsn_id(id);
+            imagDAO.save(img);
+        }
+
         return "redirect:/person";
     }
 
 
 
 
-    /*@RequestMapping(value="/imag/associate{id}", method=RequestMethod.GET)
-    public */
 
 }
