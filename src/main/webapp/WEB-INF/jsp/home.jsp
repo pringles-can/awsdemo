@@ -89,9 +89,15 @@
                     </tr>
                     <c:forEach items="${person.content}" var="person">
                         <tr>
-                            <td class="tg-d7nh">${person.id}</td>
-                            <td class="tg-d7nh">${person.name}</td>
-                            <td class="tg-jnuu">${person.country}</td>
+                            <td class="tg-d7nh">
+                                <a href="<c:url value='/person/edit/${person.id}' /> "  class="button">${person.id}</a>
+                            </td>
+                            <td class="tg-d7nh">
+                                <a href="<c:url value='/person/edit/${person.id}' />"  class="button">${person.name}</a>
+                            </td>
+                            <td class="tg-jnuu">
+                                <a href="<c:url value='/person/edit/${person.id}' />"  class="button">${person.name}</a>
+                            </td>
 
                         </tr>
                     </c:forEach>

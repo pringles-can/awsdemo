@@ -42,7 +42,6 @@ public class HomeSweetHomeController {
     private List<Imag> listImages;
     private List<byte[]> personImages;
 
-
     //home shit
     @RequestMapping(value="/")
     public String mainPage() {
