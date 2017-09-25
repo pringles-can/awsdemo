@@ -37,19 +37,11 @@ public class HomeSweetHomeController {
     @Autowired
     ImagDAO imagDAO;
 
-    private String imgUrl;
     private List<Person> listPersons;
 
     private List<Imag> listImages;
     private List<byte[]> personImages;
 
-    public void setImgUrl(String url) {
-        this.imgUrl = url;
-    }
-
-    public String getImgUrl() {
-        return this.imgUrl;
-    }
 
     //home shit
     @RequestMapping(value="/")
@@ -123,6 +115,7 @@ public class HomeSweetHomeController {
     @ModelAttribute("person")
     @RequestMapping(value="/person", method = RequestMethod.GET)
     public String loadPersonPage() {
+        sortByIdAsc();
         return "person";
     }
 
