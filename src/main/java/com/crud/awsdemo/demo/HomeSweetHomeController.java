@@ -145,7 +145,7 @@ public class HomeSweetHomeController {
                     return "Update";
                 }
 
-                return "aintShitFound"; // return something else, searchbyname
+                return "Update"; // return something else, searchbyname
             }
             else {
                 List<Person> listP = personDAO.findAll();
@@ -160,7 +160,7 @@ public class HomeSweetHomeController {
         } catch (NonUniqueResultException nure) {
             //
         }
-        return "horseshit";
+        return "Update";
     }
 
     private String showPics(String id, ModelMap model) {

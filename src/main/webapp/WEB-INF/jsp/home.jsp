@@ -5,11 +5,6 @@
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <head>
     <meta charset="utf-8">
@@ -20,99 +15,105 @@
     <title>Person</title>
 
 </head>
-    <style type="text/css">
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-color: #aabcfe;
-        }
+<style type="text/css">
+    .tg {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border-color: #aabcfe;
+    }
 
-        .tg td {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #aabcfe;
-            color: #669;
-            background-color: #e8edff;
-        }
+    .tg td {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        padding: 10px 5px;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        word-break: normal;
+        border-color: #aabcfe;
+        color: #669;
+        background-color: #e8edff;
+    }
 
-        .tg th {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #aabcfe;
-            color: #039;
-            background-color: #b9c9fe;
-        }
+    .tg th {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        padding: 10px 5px;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        word-break: normal;
+        border-color: #aabcfe;
+        color: #039;
+        background-color: #b9c9fe;
+    }
 
-        .tg .tg-mbw0 {
-            font-size: 14px;
-            font-family: "Trebuchet MS", Helvetica, sans-serif !important;;
-            background-color: #cbf6c8;
-            color: #a1e09d;
-            vertical-align: top
-        }
+    .tg .tg-mbw0 {
+        font-size: 14px;
+        font-family: "Trebuchet MS", Helvetica, sans-serif !important;;
+        background-color: #cbf6c8;
+        color: #a1e09d;
+        vertical-align: top
+    }
 
-        .tg .tg-2l3u {
-            background-color: #cbf6c8;
-            color: #a1e09d;
-            vertical-align: top
-        }
+    .tg .tg-2l3u {
+        background-color: #cbf6c8;
+        color: #a1e09d;
+        vertical-align: top
+    }
 
-        .tg .tg-mkpy {
-            font-size: 16px;
-            font-family: "Trebuchet MS", Helvetica, sans-serif !important;;
-            background-color: #cbf6c8;
-            color: #32cb00;
-            vertical-align: top
-        }
-
-
-    </style>
+    .tg .tg-mkpy {
+        font-size: 16px;
+        font-family: "Trebuchet MS", Helvetica, sans-serif !important;;
+        background-color: #cbf6c8;
+        color: #32cb00;
+        vertical-align: top
+    }
 
 
-    <div class="container-fluid text-center">
-        <div class="row content">
-            <div class="container">
-                <h2>Person</h2>
-                <p>Some people might be listed below</p>
-                <table class="table table-bordered">
-                    <c:if test="${!empty listPersons}">
-                        <tr style="border-color:#ccc;color:#333;">
-                            <td class="tg-5919">ID</td>
-                            <td class="tg-5919">Name</td>
-                            <td class="tg-5919">RANDOM FUCKING TEXT</td>
+</style>
+
+
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="container">
+            <h2>Person</h2>
+            <p>Some people might be listed below</p>
+            <table class="table table-bordered">
+                <c:if test="${!empty listPersons}">
+                    <tr style="border-color:#ccc;color:#333;">
+                        <td class="tg-5919">ID</td>
+                        <td class="tg-5919">Name</td>
+                        <td class="tg-5919">RANDOM FUCKING TEXT</td>
+                    </tr>
+                    <c:forEach items="${person.content}" var="person">
+                        <tr>
+                            <td class="tg-d7nh">${person.id}</td>
+                            <td class="tg-d7nh">${person.name}</td>
+                            <td class="tg-jnuu">${person.country}</td>
+
                         </tr>
-                        <c:forEach items="${person.content}" var="person">
-                            <tr>
-                                <td class="tg-d7nh">${person.id}</td>
-                                <td class="tg-d7nh">${person.name}</td>
-                                <td class="tg-jnuu">${person.country}</td>
-
-                            </tr>
-                        </c:forEach>
-                    </c:if>
-                </table>
-            </div>
-
-
-            <ul class="pagination">
-                <c:forEach var="i" begin="1" end="${person.totalPages}">
-                    <li><a href="/?page=${i-1}"><c:out value="${i}"/></a></li>
-                </c:forEach>
-                </p>
-            </ul>
-            <br/>
+                    </c:forEach>
+                </c:if>
+            </table>
         </div>
-        </div>
+
+
+        <ul class="pagination">
+            <c:forEach var="i" begin="1" end="${person.totalPages}">
+                <li><a href="/?page=${i-1}"><c:out value="${i}"/></a></li>
+            </c:forEach>
+        </ul>
+        <br/>
+    </div>
+</div>
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </html>

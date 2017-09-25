@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface PersonDAO extends JpaRepository<Person, Integer>{
 
     Person findByNameIgnoringCase(String name);
-    Page findAllOrOrderById(Pageable pageable);
+    Page findAll(Pageable pageable);
+    Page findAllOrderById(Pageable pageable);
 
 }
