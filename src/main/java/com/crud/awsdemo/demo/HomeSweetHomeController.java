@@ -3,6 +3,7 @@ package com.crud.awsdemo.demo;
 import com.crud.awsdemo.dao.ImagDAO;
 import com.crud.awsdemo.dao.PersonDAO;
 import com.crud.awsdemo.spring.model.Imag;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +18,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.crud.awsdemo.spring.model.Person;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.NonUniqueResultException;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -73,6 +76,30 @@ public class HomeSweetHomeController {
 
         //model.addAttribute("listPersons", listPersons);
         return persons;
+    }
+
+    @RequestMapping(value="/getPeople", method = RequestMethod.POST)
+    public void getPeople(@RequestParam String term, HttpServletResponse response) {
+        try {
+            response.setContentType("application/json");
+
+            String g = new Gson().toJson(simulateSearchResult(term));
+            response.getWriter().write(g);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private List simulateSearchResult(String empName) {
+
+        List result = new ArrayList();
+
+        for (Person p : listPersons) {
+            if (p.getName().contains(empName)) {
+                result.add(p);
+            }
+        }
+        return result;
     }
 
     @RequestMapping(value="/person/edit/{id}" , method = RequestMethod.GET )
