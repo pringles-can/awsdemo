@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $(function() {
-        $("#myNavbar.form-control").autocomplete({
+        $("#searcher").autocomplete({
             source: function(request, response) {
                 $.ajax({
                     url: "/person/getPeople",
@@ -11,6 +11,7 @@ $(document).ready(function() {
 
                     success: function(data) {
                         response($.map(data, function(v,i){
+                            console.log("v.empName = " + v.empName)
                             return {
                                 label: v.empName,
                                 value: v.empName

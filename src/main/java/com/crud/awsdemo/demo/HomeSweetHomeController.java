@@ -78,16 +78,19 @@ public class HomeSweetHomeController {
         return persons;
     }
 
-    @RequestMapping(value="/getPeople", method = RequestMethod.POST)
-    public void getPeople(@RequestParam String term, HttpServletResponse response) {
-        try {
+
+    @RequestMapping(value="/person/getPeople", method = RequestMethod.POST)
+    public @ResponseBody List<Person> getPeople(@RequestParam String term, HttpServletResponse response) {
+        System.out.println("Term entered is: " + term);
+        /*try {
             response.setContentType("application/json");
 
             String g = new Gson().toJson(simulateSearchResult(term));
             response.getWriter().write(g);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+        return simulateSearchResult(term.toLowerCase());
     }
 
     private List simulateSearchResult(String empName) {
@@ -96,7 +99,7 @@ public class HomeSweetHomeController {
 
         for (Person p : listPersons) {
             if (p.getName().contains(empName)) {
-                result.add(p);
+                result.add(p.getName());
             }
         }
         return result;
