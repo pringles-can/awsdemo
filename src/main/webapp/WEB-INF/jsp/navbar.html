@@ -175,10 +175,10 @@
 
                         success: function(data) {
                             response($.map(data, function(v, i){
-                                console.log("name: " +  + " type : " + v.type)
+                                console.log("name: " + v.valueOf() )
                                 return {
-                                    label: v.empName,
-                                    value: v.empName
+                                    label: v,
+                                    value: v
                                 };
                             }));
                         }
