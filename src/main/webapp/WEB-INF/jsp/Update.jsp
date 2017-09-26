@@ -47,7 +47,7 @@
 
     </style>
 
-    <form method="post" action="/person/save/${person.id}">
+    <form method="post" action="/person/save/${person.id}" commandName="addPerson">
         <table class="tg">
             <tr>
                 <th class="tg-mbw0">New Name:<input type="text" name="name" id="id18" value="${person.name}"></th>

@@ -5,6 +5,7 @@ import com.crud.awsdemo.dao.PersonDAO;
 import com.crud.awsdemo.spring.model.Imag;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,7 @@ import javax.persistence.NonUniqueResultException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.validation.Validator;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,8 @@ public class HomeSweetHomeController {
     @Autowired
     ImagDAO imagDAO;
 
+
+
     private List<Person> listPersons;
 
     private List<Imag> listImages;
@@ -48,6 +52,7 @@ public class HomeSweetHomeController {
     //home shit
     @RequestMapping(value="/")
     public String mainPage() {
+
         return "home";
     }
 
@@ -67,10 +72,10 @@ public class HomeSweetHomeController {
         if (!listPersons.isEmpty()) {
             model.addAttribute("listPersons", listPersons);
             for (Person person : listPersons) {
-                model.addAttribute("name", person.getName());
+            /*    model.addAttribute("name", person.getName());
                 model.addAttribute("id", person.getId());
                 model.addAttribute("country", person.getCountry());
-                model.addAttribute("imgs", person.getImgs());
+                model.addAttribute("imgs", person.getImgs());*/
             }
         }
 
@@ -82,23 +87,15 @@ public class HomeSweetHomeController {
     @RequestMapping(value="/person/getPeople", method = RequestMethod.POST)
     public @ResponseBody List<Person> getPeople(@RequestParam String term, HttpServletResponse response) {
         System.out.println("Term entered is: " + term);
-        /*try {
-            response.setContentType("application/json");
-
-            String g = new Gson().toJson(simulateSearchResult(term));
-            response.getWriter().write(g);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
         return simulateSearchResult(term.toLowerCase());
     }
 
-    private List simulateSearchResult(String empName) {
+    private List simulateSearchResult(String pName) {
 
         List result = new ArrayList();
 
         for (Person p : listPersons) {
-            if (p.getName().contains(empName)) {
+            if (p.getName().contains(pName)) {
                 result.add(p.getName());
             }
         }
@@ -120,23 +117,21 @@ public class HomeSweetHomeController {
 
 
     @RequestMapping(value="/person/save/{id}", method = RequestMethod.POST )
-    public String save(@PathVariable("id") int id, @RequestParam String name,
-                       @RequestParam String country) {
-
-        if (name.isEmpty()) {
-            System.out.println("shit's fucked");
-            return "person";
-
-        } else
-            if (name.length() > 20 || country.length() > 30) {
-            return "person";
-
+    public String save(ModelMap model, @PathVariable("id") int id, @RequestParam String name,
+                       @Valid @ModelAttribute("addPerson") Person p,
+                       BindingResult bindingResult, @RequestParam String country) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("error saving: " + bindingResult.getAllErrors());
+            return "/";
         } else {
+
+
             Person dude = personDAO.findOne(id);
             dude.setName(name);
             dude.setCountry(country);
             personDAO.save(dude);
-            return "redirect:/person";
+            model.put("addPerson", dude);
+            return "redirect:/";
 
         }
     }
@@ -149,10 +144,13 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/person/add", method = RequestMethod.POST)
-    public String addPerson(@RequestParam String name, @RequestParam String country) {
-
+    public String addPerson( @RequestParam String name, @RequestParam String country) {
+       /* if (bindingResult.hasErrors()) {
+            System.out.println("Errors: " + bindingResult.getAllErrors());
+            return "person";
+        }*/
         personDAO.save(new Person(name, country));
-        return "redirect:/person";
+        return "redirect:/home";
     }
 
     @RequestMapping(value="/imag/upload/{id}", method = RequestMethod.GET)

@@ -114,7 +114,7 @@
             <table class="tg">
                 <tr>
                     <butt class="tg-mkpy">Add A person:</butt>
-                    <butt class="tg-mbw0"><input type="text" name = "name" id="id5" /></butt>
+                    <butt class="tg-mbw0"><input type="text" name = "name" id="id5"  /></butt>
                     <butt class="tg-mbw0"><input type="text" name = "country" id="id6" /></butt>
                     <butt class="tg-mbw0"><input type="submit" id="id3" /></butt>
                 </tr>
