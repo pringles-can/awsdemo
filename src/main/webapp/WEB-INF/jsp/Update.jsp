@@ -56,7 +56,6 @@
                 <td colspan="4">
                 <th class="tg-mbw0"><input type="submit" id="id20"/></th>
                 </td>
-
             </tr>
             <td>
                 <a href="<c:url value='/person/remove/${person.id}' />" class="btn"

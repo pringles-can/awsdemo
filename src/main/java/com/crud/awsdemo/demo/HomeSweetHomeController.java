@@ -120,12 +120,12 @@ public class HomeSweetHomeController {
 
     @RequestMapping(value="/person/save/{id}", method = RequestMethod.POST )
     public String save(ModelMap model, @RequestParam String name,
-                       @Valid @ModelAttribute("addPerson") Person p,
-                       BindingResult bindingResult, @RequestParam String country) {
+                       @Valid @ModelAttribute("addPerson") Person p, BindingResult bindingResult, @RequestParam String country) {
         model.put("person", p);
         if (bindingResult.hasErrors()) {
             System.out.println("error saving: " + bindingResult.getAllErrors());
             System.out.println("class: " + BindingResult.class.getName());
+            showPics(p.getId(), model);
             return "Update";
         } else {
 
@@ -158,7 +158,8 @@ public class HomeSweetHomeController {
     }
 
     @RequestMapping(value="/search{id}" , method = RequestMethod.GET )
-    public String search(@RequestParam String id, ModelMap model)
+    public String search(@RequestParam String id, @Valid @ModelAttribute("addPerson") Person p, BindingResult bindingResult,
+                         ModelMap model)
             throws ServletException, IOException {
 
         try {
@@ -166,6 +167,8 @@ public class HomeSweetHomeController {
             if(personDAO.findByNameIgnoringCase(id)==null) {
                 int intId = Integer.parseInt(id); // fucking boxing
                 if (personDAO.findOne(intId) != null) {
+                    Person prsn = personDAO.findOne(intId);
+                    model.put("addPerson", prsn);
                     showPics(intId, model);
                     return "Update";
                 }
@@ -178,6 +181,7 @@ public class HomeSweetHomeController {
                         prsn.getName().toUpperCase().contains(id.toUpperCase())).collect(Collectors.toList());
                 for (Person person : persons) {
                     showPics(person.getId(), model);
+                    model.put("addPerson", person);
                 }
                 //showPics(id, model);
                 return "Update";
