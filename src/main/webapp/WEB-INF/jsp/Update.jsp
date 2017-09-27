@@ -39,22 +39,18 @@
 <p></p>
 
 <table>
-    <form:errors path="*" cssClass="errorblock" element="div">
-
-    </form:errors>
 
     <style type="text/css">
 
     </style>
 
     <form method="post" action="/person/save/${person.id}" modelAttribute="addPerson">
-        <script type="text/javascript">
-            console.log("person.id: " + ${person.id});
-        </script>
+        <form:errors path="*" cssClass="errorblock" element="div"></form:errors>
         <table class="tg">
             <tr>
-                <th class="tg-mbw0">New Name:<input type="text" name="name" id="id18" value="${person.name}"></th>
-                <td><form:errors path="name" cssClass="error">shit's wrong</form:errors> </td>
+                <!--<th class="tg-mbw0">New Name:<input type="text" path="name" name="name" id="id18" value="${person.name}"/></th>-->
+                <th class="tg-mbw0">New Name:</th><td><form:input path="person.name" value="${addPerson.name}"/></td>
+                <td><form:errors path="person.name" cssClass="error"></form:errors> </td>
                 <th class="tg-mbw0">New fucking whatever:<input type="text" name="country" id="id19"
                                                                 value="${person.country}"></th>
                 <th class="tg-mbw0"><input type="submit" id="id20"/></th>

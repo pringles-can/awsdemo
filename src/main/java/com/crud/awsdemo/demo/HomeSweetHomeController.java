@@ -115,6 +115,7 @@ public class HomeSweetHomeController {
     public String save(ModelMap model, @RequestParam String name,
                        @Valid @ModelAttribute("addPerson") Person p,
                        BindingResult bindingResult, @RequestParam String country) {
+        model.put("person", p);
         if (bindingResult.hasErrors()) {
             System.out.println("error saving: " + bindingResult.getAllErrors());
             return "Update";
