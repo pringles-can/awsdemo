@@ -47,7 +47,7 @@
 
     </style>
 
-    <form method="post" action="/person/save/${person.id}" commandName="addPerson">
+    <form method="post" action="/person/save/${person.id}" modelAttribute="addPerson">
         <script type="text/javascript">
             console.log("person.id: " + ${person.id});
         </script>

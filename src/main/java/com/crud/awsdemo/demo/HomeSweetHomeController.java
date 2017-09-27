@@ -62,7 +62,7 @@ public class HomeSweetHomeController {
 
     //Model
     @Valid
-    @ModelAttribute("person")
+    @ModelAttribute("persn")
     public Page<Person> data(ModelMap model,
                              @PageableDefault(value = 5, page = 0, sort = {"id"}) Pageable pageable) {
         Page<Person> persons = personDAO.findAll(pageable);
@@ -112,7 +112,7 @@ public class HomeSweetHomeController {
 
 
     @RequestMapping(value="/person/save/{id}", method = RequestMethod.POST )
-    public String save(ModelMap model, @PathVariable("id") int id, @RequestParam String name,
+    public String save(ModelMap model, @RequestParam String name,
                        @Valid @ModelAttribute("addPerson") Person p,
                        BindingResult bindingResult, @RequestParam String country) {
         if (bindingResult.hasErrors()) {
@@ -121,7 +121,7 @@ public class HomeSweetHomeController {
         } else {
 
 
-            Person dude = personDAO.findOne(id);
+            Person dude = personDAO.findOne(p.getId());
             dude.setName(name);
             dude.setCountry(country);
             personDAO.save(dude);
@@ -131,7 +131,7 @@ public class HomeSweetHomeController {
         }
     }
 
-    @ModelAttribute("person")
+    @ModelAttribute("persn")
     @RequestMapping(value="/person", method = RequestMethod.GET)
     public String loadPersonPage() {
         sortByIdAsc();

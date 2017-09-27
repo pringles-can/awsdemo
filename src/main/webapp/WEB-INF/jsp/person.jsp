@@ -106,8 +106,8 @@
 
 <c:url var="addAction" value="/person/add" ></c:url>
 
-<%--@elvariable id="person" type="com.crud.awsdemo.spring.model.Person"--%>
-<form:form action="${addAction}" commandName="person">
+<%--@elvariable id="persn" type="com.crud.awsdemo.spring.model.Person"--%>
+<form:form action="${addAction}" modelAttribute="persn">
     <form:errors path="*" cssClass="errorblock" element="div"></form:errors>
     <table>
         <form id="addForm" method = "post" action = "/person/person/add" >

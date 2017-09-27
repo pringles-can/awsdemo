@@ -88,7 +88,7 @@
                         <td class="tg-5919">Name</td>
                         <td class="tg-5919">RANDOM FUCKING TEXT</td>
                     </tr>
-                    <c:forEach items="${person.content}" var="person">
+                    <c:forEach items="${persn.content}" var="person">
                         <tr>
                             <td class="tg-d7nh">
                                 <a href="<c:url value='/person/edit/${person.id}' /> "  class="button">${person.id}</a>
