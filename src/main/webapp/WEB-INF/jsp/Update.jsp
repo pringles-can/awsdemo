@@ -48,6 +48,9 @@
     </style>
 
     <form method="post" action="/person/save/${person.id}" commandName="addPerson">
+        <script type="text/javascript">
+            console.log("person.id: " + ${person.id});
+        </script>
         <table class="tg">
             <tr>
                 <th class="tg-mbw0">New Name:<input type="text" name="name" id="id18" value="${person.name}"></th>
@@ -71,7 +74,7 @@
                     <table class="table table-bordered">
                         <c:if test="${!empty personImages}">
                             <c:forEach items="${personImages}" var="person" varStatus="loop">
-                            <td class="tg-jnuu"><img src="data:image/jpeg;base64,${personImages.get(loop.index)}" heigh="256" width="256"/></td>
+                            <td class="tg-jnuu"><img src="data:image/jpeg;base64,${personImages.get(loop.index)}" height="256" width="256"/></td>
                             <tr>
                             </tr>
                             </c:forEach>

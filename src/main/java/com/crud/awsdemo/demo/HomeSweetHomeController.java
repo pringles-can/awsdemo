@@ -71,12 +71,7 @@ public class HomeSweetHomeController {
 
         if (!listPersons.isEmpty()) {
             model.addAttribute("listPersons", listPersons);
-            for (Person person : listPersons) {
-            /*    model.addAttribute("name", person.getName());
-                model.addAttribute("id", person.getId());
-                model.addAttribute("country", person.getCountry());
-                model.addAttribute("imgs", person.getImgs());*/
-            }
+
         }
 
         //model.addAttribute("listPersons", listPersons);
@@ -122,7 +117,7 @@ public class HomeSweetHomeController {
                        BindingResult bindingResult, @RequestParam String country) {
         if (bindingResult.hasErrors()) {
             System.out.println("error saving: " + bindingResult.getAllErrors());
-            return "/";
+            return "Update";
         } else {
 
 
