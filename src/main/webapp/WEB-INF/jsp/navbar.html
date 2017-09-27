@@ -284,7 +284,6 @@
 
                         success: function(data) {
                             response($.map(data, function(v, i){
-                                console.log("name: " + v.valueOf() )
                                 return {
                                     label: v,
                                     value: v
@@ -292,6 +291,13 @@
                             }));
                         }
                     });
+                },
+                select: function(event, ui) {
+                    if (ui.item) {
+                        console.log("ui shit: " + ui.item);
+                        $(event.target).val(ui.item.label);
+                        $(event.target.form).submit();
+                    }
                 }
             });
         });
