@@ -3,9 +3,7 @@ package com.crud.awsdemo.demo;
 import com.crud.awsdemo.dao.ImagDAO;
 import com.crud.awsdemo.dao.PersonDAO;
 import com.crud.awsdemo.spring.model.Imag;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,13 +17,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.crud.awsdemo.spring.model.Person;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.NonUniqueResultException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import javax.validation.Validator;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -121,7 +117,7 @@ public class HomeSweetHomeController {
     @RequestMapping(value="/person/save/{id}", method = RequestMethod.POST )
     public String save(ModelMap model, @RequestParam String name,
                        @Valid @ModelAttribute("addPerson") Person p, BindingResult bindingResult, @RequestParam String country) {
-        model.put("person", p);
+        //model.put("person", p);
         if (bindingResult.hasErrors()) {
             System.out.println("error saving: " + bindingResult.getAllErrors());
             System.out.println("class: " + BindingResult.class.getName());
@@ -166,15 +162,18 @@ public class HomeSweetHomeController {
         try {
 
             if(personDAO.findByNameIgnoringCase(id)==null) {
-                int intId = Integer.parseInt(id); // fucking boxing
-                if (personDAO.findOne(intId) != null) {
-                    Person prsn = personDAO.findOne(intId);
-                    model.put("addPerson", prsn);
-                    showPics(intId, model);
-                    return "Update";
+                try {
+                    int intId = Integer.parseInt(id); // fucking boxing
+                    if (personDAO.findOne(Integer.parseInt(id)) != null) {
+                        Person prsn = personDAO.findOne(intId);
+                        model.put("addPerson", prsn);
+                        showPics(intId, model);
+                        return "Update";
+                    }
+                } catch (NumberFormatException nfe) {
+                    return "redirect:/";
                 }
 
-                return "Update"; // return something else, searchbyname
             }
             else {
                 List<Person> listP = personDAO.findAll();
@@ -184,7 +183,7 @@ public class HomeSweetHomeController {
                     showPics(person.getId(), model);
                     model.put("addPerson", person);
                 }
-                //showPics(id, model);
+
                 return "Update";
             }
         } catch (NonUniqueResultException nure) {
