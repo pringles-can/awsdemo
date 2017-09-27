@@ -91,13 +91,13 @@
                     <c:forEach items="${persn.content}" var="person">
                         <tr>
                             <td class="tg-d7nh">
-                                <a href="<c:url value='/person/edit/${person.id}' /> "  class="button">${person.id}</a>
+                                <a href="<c:url value='/person/edit/${person.id}' /> "  >${person.id}</a>
                             </td>
                             <td class="tg-d7nh">
-                                <a href="<c:url value='/person/edit/${person.id}' />"  class="button">${person.name}</a>
+                                <a href="<c:url value='/person/edit/${person.id}' />"  class="tg">${person.name}</a>
                             </td>
                             <td class="tg-jnuu">
-                                <a href="<c:url value='/person/edit/${person.id}' />"  class="button">${person.country}</a>
+                                <a href="<c:url value='/person/edit/${person.id}' />"  class="tg">${person.country}</a>
                             </td>
 
                         </tr>

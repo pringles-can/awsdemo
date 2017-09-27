@@ -50,13 +50,19 @@
             <tr>
                 <th class="tg-mbw0">New Name:</th><td><form:input path="addPerson.name" value="${addPerson.name}"/></td>
                 <td><form:errors path="addPerson.name" cssClass="error"> </form:errors> </td>
-                <th class="tg-mbw0">New fucking whatever:<input type="text" name="country" id="id19"
+                <td class="tg-mbw0"></td>
+                <th class="tg-mbw0"> New fucking whatever:<input type="text" name="country" id="id19"
                                                                 value="${person.country}"></th>
                 <td colspan="4">
                 <th class="tg-mbw0"><input type="submit" id="id20"/></th>
                 </td>
 
             </tr>
+            <td>
+                <a href="<c:url value='/person/remove/${person.id}' />" class="btn"
+                   id="removeButton">Delete</a>
+                <a href="<c:url value='/imag/upload/${person.id}' />" class="button">Upload Pic</a>
+            </td>
 
             <img src="" alt=""/>
         </table>

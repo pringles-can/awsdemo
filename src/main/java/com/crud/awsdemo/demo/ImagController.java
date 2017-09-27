@@ -80,14 +80,14 @@ public class ImagController  {
 
 
         if (image.isEmpty()) {
-            return "person";
+            return "redirect:/";
         } else {
             Imag img = new Imag(image.getBytes());
             img.setPrsn_id(id);
             imagDAO.save(img);
         }
 
-        return "redirect:/person";
+        return "redirect:/";
     }
 
 

@@ -68,16 +68,23 @@ public class HomeSweetHomeController {
         Page<Person> persons = personDAO.findAll(pageable);
         Page<Person> prsns = personDAO.findAll(new PageRequest(0, 20));
         listPersons = prsns.getContent();
-
+        //model.put("persons", persons);
+        //model.put("prsns", prsns);
         if (!listPersons.isEmpty()) {
             model.addAttribute("listPersons", listPersons);
 
         }
 
-        //model.addAttribute("listPersons", listPersons);
         return persons;
     }
 
+    @ModelAttribute("persn")
+    @RequestMapping(value="/person", method = RequestMethod.GET)
+    public String loadPersonPage(ModelMap model, @PageableDefault(value = 5, page = 0, sort = {"id"}) Pageable pageable) {
+        Page<Person> persons = personDAO.findAll(pageable);
+        model.put("persons", persons);
+        return "person";
+    }
 
     @RequestMapping(value="/person/getPeople", method = RequestMethod.POST)
     public @ResponseBody List<Person> getPeople(@RequestParam String term, HttpServletResponse response) {
@@ -133,12 +140,6 @@ public class HomeSweetHomeController {
         }
     }
 
-    @ModelAttribute("persn")
-    @RequestMapping(value="/person", method = RequestMethod.GET)
-    public String loadPersonPage() {
-        sortByIdAsc();
-        return "person";
-    }
 
     @RequestMapping(value="/person/add", method = RequestMethod.POST)
     public String addPerson( @RequestParam String name, @RequestParam String country) {
@@ -234,7 +235,7 @@ public class HomeSweetHomeController {
         personDAO.delete(id);
         //showPics(id, model);
 
-        return "redirect:/person";
+        return "redirect:/";
     }
 
 }
