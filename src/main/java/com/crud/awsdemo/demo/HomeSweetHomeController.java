@@ -78,11 +78,11 @@ public class HomeSweetHomeController {
         return persons;
     }
 
-    @ModelAttribute("persn")
-    @RequestMapping(value="/person", method = RequestMethod.GET)
-    public String loadPersonPage(ModelMap model, @PageableDefault(value = 5, page = 0, sort = {"id"}) Pageable pageable) {
-        Page<Person> persons = personDAO.findAll(pageable);
-        model.put("persons", persons);
+    @RequestMapping(value="/person")
+    public String loadPersonPage(ModelMap model) {
+       // Page<Person> persons = personDAO.findAll(pageable);
+        //model.put("persons", persons);
+        model.addAttribute("person", new Person());
         return "person";
     }
 
@@ -129,25 +129,26 @@ public class HomeSweetHomeController {
             return "Update";
         } else {
 
-
             Person dude = personDAO.findOne(p.getId());
             dude.setName(name);
             dude.setCountry(country);
             personDAO.save(dude);
             model.put("addPerson", dude);
+
             return "redirect:/";
 
         }
     }
 
-
     @RequestMapping(value="/person/add", method = RequestMethod.POST)
-    public String addPerson( @RequestParam String name, @RequestParam String country) {
-       /* if (bindingResult.hasErrors()) {
+    public String addPerson(ModelMap model, @Valid @ModelAttribute("addPerson") Person p, BindingResult bindingResult,
+                            @RequestParam String country) {
+        model.put("addPerson", p);
+        if (bindingResult.hasErrors()) {
             System.out.println("Errors: " + bindingResult.getAllErrors());
             return "person";
-        }*/
-        personDAO.save(new Person(name, country));
+        }
+        personDAO.save(new Person(p.getName(), country));
         return "redirect:/";
     }
 

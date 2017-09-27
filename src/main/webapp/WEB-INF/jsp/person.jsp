@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page session="false" %>
 <%@ include file="navbar.html" %>
@@ -141,17 +140,14 @@
 </h1>
 
 
-<c:url var="addAction" value="/person/add"></c:url>
-
-<%--@elvariable id="persn" type="com.crud.awsdemo.spring.model.Person"--%>
-<form:form action="${addAction}" modelAttribute="persn">
     <form:errors path="*" cssClass="errorblock" element="div"></form:errors>
     <table>
-        <form id="addForm" method="post" action="/person/person/add">
+        <form id="addForm" method="post" action="/person/add">
             <table class="tg">
                 <tr>
                     <butt class="tg-mkpy">Add A person:</butt>
                     <butt class="tg-mbw0"><input type="text" name="name" id="id5"/></butt>
+                    <td><form:errors path="addPerson.name" cssClass="error"> </form:errors> </td>
                     <butt class="tg-mbw0"><input type="text" name="country" id="id6"/></butt>
                     <butt class="tg-mbw0"><input type="submit" id="id3"/></butt>
                 </tr>
@@ -162,47 +158,29 @@
             </td>
         </tr>
     </table>
-</form:form>
 <br>
 
 
-<c:url var="remAction" value="/person/remove/{id}"></c:url>
-<c:url var="editAction" value="/person/edit/{id}"></c:url>
-<c:url var="imagAction" value="/imag/upload/{id}"></c:url>
-<div class="row content">
-    <div class="container">
-        <h3>Persons List</h3>
-        <%--@elvariable id="person" type="com.crud.awsdemo.spring.model.Person"--%>
-
-        <c:if test="${!empty listPersons}">
+    <%--<table>
+        <form method="post" action="/person/add">
+            <form:errors path="*" cssClass="errorblock" element="div"></form:errors>
             <table class="tg">
                 <tr>
-                    <th width="80">ID</th>
-                    <th width="120">Person Name</th>
-                    <th width="120">RANDOM FUCKING TEXT</th>
-                    <th width="340">Action</th>
+                    <th class="tg-mbw0">New Name:</th><td><form:input path="name" /></td>
+                    <td><form:errors path="name" cssClass="error"> </form:errors> </td>
+                    <td class="tg-mbw0"></td>
+                    <th class="tg-mbw0"> New fucking whatever:<input type="text" name="country" id="id19"></th>
+                    <td colspan="4">
+                    <th class="tg-mbw0"><input type="submit" id="id20"/></th>
+                    </td>
                 </tr>
-                <c:forEach items="${listPersons}" var="person">
-                    <tr>
-                        <td>${person.id}</td>
-                        <td>${person.name}</td>
-                        <td>${person.country}</td>
-                        <td><a href="<c:url value='/person/edit/${person.id}' />" class="button">Edit</a>
-                            <a href="<c:url value='/person/remove/${person.id}' />" class="btn"
-                               id="removeButton">Delete</a>
-                            <a href="<c:url value='/imag/upload/${person.id}' />" class="button">Upload Pic</a>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </c:if>
-    </div>
 
-    <ul class="pagination">
-        <c:forEach var="i" begin="1" end="${persons.totalPages}">
-            <li><a href="/?page=${i-1}"><c:out value="${i}"/></a></li>
-        </c:forEach>
-    </ul>
-</div>
+                <img src="" alt=""/>
+            </table>
+
+        </form>
+    </table>--%>
+<br>
+
 </body>
 </html>

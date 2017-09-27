@@ -19,30 +19,12 @@
     <!-- Custom styles for this template -->
 </head>
 
-
-<style type="text/css">
-    .error{
-        color: #ff0000;
-    }
-
-    .errorblock {
-        color: #000;
-        background-color: #ffEEEE;
-        border: 3px solid #ff0000;
-        padding: 8px;
-        margin: 16px;
-    }
-</style>
-
 <body>
 <p></p>
 <p></p>
 
 <table>
 
-    <style type="text/css">
-
-    </style>
 
     <form method="post" action="/person/save/${person.id}" modelAttribute="addPerson">
         <form:errors path="*" cssClass="errorblock" element="div"></form:errors>

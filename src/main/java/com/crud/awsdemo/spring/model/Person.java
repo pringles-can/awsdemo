@@ -45,7 +45,7 @@ public class Person implements Serializable {
     }
 
     // default; totally works, the debugger's full of shit
-    protected Person(){
+    public Person(){
 
     }
 
