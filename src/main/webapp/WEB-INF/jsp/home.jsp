@@ -108,7 +108,7 @@
 
 
         <ul class="pagination">
-            <c:forEach var="i" begin="1" end="${person.totalPages}">
+            <c:forEach var="i" begin="1" end="${persn.totalPages}">
                 <li><a href="/?page=${i-1}"><c:out value="${i}"/></a></li>
             </c:forEach>
         </ul>

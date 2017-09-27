@@ -48,12 +48,14 @@
         <form:errors path="*" cssClass="errorblock" element="div"></form:errors>
         <table class="tg">
             <tr>
-                <!--<th class="tg-mbw0">New Name:<input type="text" path="name" name="name" id="id18" value="${person.name}"/></th>-->
-                <th class="tg-mbw0">New Name:</th><td><form:input path="person.name" value="${addPerson.name}"/></td>
-                <td><form:errors path="person.name" cssClass="error"></form:errors> </td>
+                <th class="tg-mbw0">New Name:</th><td><form:input path="addPerson.name" value="${addPerson.name}"/></td>
+                <td><form:errors path="addPerson.name" cssClass="error"> </form:errors> </td>
                 <th class="tg-mbw0">New fucking whatever:<input type="text" name="country" id="id19"
                                                                 value="${person.country}"></th>
+                <td colspan="4">
                 <th class="tg-mbw0"><input type="submit" id="id20"/></th>
+                </td>
+
             </tr>
 
             <img src="" alt=""/>

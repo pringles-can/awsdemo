@@ -103,7 +103,7 @@ public class HomeSweetHomeController {
 
         Person person = personDAO.findOne(id);
         personDAO.save(person);
-        model.put("person", person);
+        model.put("addPerson", person);
 
         showPics(id, model);
         return "Update";
@@ -118,6 +118,7 @@ public class HomeSweetHomeController {
         model.put("person", p);
         if (bindingResult.hasErrors()) {
             System.out.println("error saving: " + bindingResult.getAllErrors());
+            System.out.println("class: " + BindingResult.class.getName());
             return "Update";
         } else {
 
@@ -146,7 +147,7 @@ public class HomeSweetHomeController {
             return "person";
         }*/
         personDAO.save(new Person(name, country));
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     @RequestMapping(value="/imag/upload/{id}", method = RequestMethod.GET)
